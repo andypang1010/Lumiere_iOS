@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A126F583287EAE88003038B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F582287EAE88003038B4 /* AppDelegate.swift */; };
+		A126F585287EAE88003038B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F584287EAE88003038B4 /* SceneDelegate.swift */; };
+		A126F58C287EAE89003038B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A126F58B287EAE89003038B4 /* Assets.xcassets */; };
+		A126F58F287EAE89003038B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A126F58D287EAE89003038B4 /* LaunchScreen.storyboard */; };
+		A126F597287EAEDB003038B4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F596287EAEDB003038B4 /* SignUpViewController.swift */; };
+		A126F599287EAF11003038B4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F598287EAF11003038B4 /* Utilities.swift */; };
+		A126F59B287EAF2E003038B4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F59A287EAF2E003038B4 /* LogInViewController.swift */; };
+		A126F59D287EAF46003038B4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F59C287EAF46003038B4 /* HomeViewController.swift */; };
+		A126F59F287EB1DB003038B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */; };
+		E484AD5616491AAB1BACAE1F /* Pods_Lumiere_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2C6418E1EA0F602BF21BB26 /* Pods_Lumiere_iOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3CDFFEFF9BD5966F9F05BB95 /* Pods-Lumiere_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumiere_iOS.release.xcconfig"; path = "Target Support Files/Pods-Lumiere_iOS/Pods-Lumiere_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		A126F57F287EAE88003038B4 /* Lumiere_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lumiere_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A126F582287EAE88003038B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A126F584287EAE88003038B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A126F58B287EAE89003038B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A126F58E287EAE89003038B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A126F590287EAE89003038B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A126F596287EAEDB003038B4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A126F598287EAF11003038B4 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		A126F59A287EAF2E003038B4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		A126F59C287EAF46003038B4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A2C6418E1EA0F602BF21BB26 /* Pods_Lumiere_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lumiere_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA22CD94054533FA609A3115 /* Pods-Lumiere_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumiere_iOS.debug.xcconfig"; path = "Target Support Files/Pods-Lumiere_iOS/Pods-Lumiere_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A126F57C287EAE88003038B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E484AD5616491AAB1BACAE1F /* Pods_Lumiere_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A126F576287EAE88003038B4 = {
+			isa = PBXGroup;
+			children = (
+				A126F581287EAE88003038B4 /* Lumiere_iOS */,
+				A126F580287EAE88003038B4 /* Products */,
+				CD679B3AEBFEB8B929F161C4 /* Pods */,
+				DD604264ED77882ECA57910F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A126F580287EAE88003038B4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A126F57F287EAE88003038B4 /* Lumiere_iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A126F581287EAE88003038B4 /* Lumiere_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A126F582287EAE88003038B4 /* AppDelegate.swift */,
+				A126F598287EAF11003038B4 /* Utilities.swift */,
+				A126F584287EAE88003038B4 /* SceneDelegate.swift */,
+				A126F5A0287EB1E1003038B4 /* ViewControllers */,
+				A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */,
+				A126F58B287EAE89003038B4 /* Assets.xcassets */,
+				A126F58D287EAE89003038B4 /* LaunchScreen.storyboard */,
+				A126F590287EAE89003038B4 /* Info.plist */,
+			);
+			path = Lumiere_iOS;
+			sourceTree = "<group>";
+		};
+		A126F5A0287EB1E1003038B4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A126F59A287EAF2E003038B4 /* LogInViewController.swift */,
+				A126F59C287EAF46003038B4 /* HomeViewController.swift */,
+				A126F596287EAEDB003038B4 /* SignUpViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CD679B3AEBFEB8B929F161C4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA22CD94054533FA609A3115 /* Pods-Lumiere_iOS.debug.xcconfig */,
+				3CDFFEFF9BD5966F9F05BB95 /* Pods-Lumiere_iOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DD604264ED77882ECA57910F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A2C6418E1EA0F602BF21BB26 /* Pods_Lumiere_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A126F57E287EAE88003038B4 /* Lumiere_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A126F593287EAE89003038B4 /* Build configuration list for PBXNativeTarget "Lumiere_iOS" */;
+			buildPhases = (
+				329240246F945ACD925E51DA /* [CP] Check Pods Manifest.lock */,
+				A126F57B287EAE88003038B4 /* Sources */,
+				A126F57C287EAE88003038B4 /* Frameworks */,
+				A126F57D287EAE88003038B4 /* Resources */,
+				981ABD71596C5B519A97E3FA /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Lumiere_iOS;
+			productName = Lumiere_iOS;
+			productReference = A126F57F287EAE88003038B4 /* Lumiere_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A126F577287EAE88003038B4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					A126F57E287EAE88003038B4 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = A126F57A287EAE88003038B4 /* Build configuration list for PBXProject "Lumiere_iOS" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A126F576287EAE88003038B4;
+			productRefGroup = A126F580287EAE88003038B4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A126F57E287EAE88003038B4 /* Lumiere_iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A126F57D287EAE88003038B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A126F58F287EAE89003038B4 /* LaunchScreen.storyboard in Resources */,
+				A126F58C287EAE89003038B4 /* Assets.xcassets in Resources */,
+				A126F59F287EB1DB003038B4 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		329240246F945ACD925E51DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Lumiere_iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		981ABD71596C5B519A97E3FA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lumiere_iOS/Pods-Lumiere_iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Lumiere_iOS/Pods-Lumiere_iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lumiere_iOS/Pods-Lumiere_iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A126F57B287EAE88003038B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A126F583287EAE88003038B4 /* AppDelegate.swift in Sources */,
+				A126F597287EAEDB003038B4 /* SignUpViewController.swift in Sources */,
+				A126F599287EAF11003038B4 /* Utilities.swift in Sources */,
+				A126F59B287EAF2E003038B4 /* LogInViewController.swift in Sources */,
+				A126F585287EAE88003038B4 /* SceneDelegate.swift in Sources */,
+				A126F59D287EAF46003038B4 /* HomeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A126F58D287EAE89003038B4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A126F58E287EAE89003038B4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A126F591287EAE89003038B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A126F592287EAE89003038B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A126F594287EAE89003038B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA22CD94054533FA609A3115 /* Pods-Lumiere_iOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q8AWJZAL95;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Lumiere_iOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andypang1010.Lumiere-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A126F595287EAE89003038B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CDFFEFF9BD5966F9F05BB95 /* Pods-Lumiere_iOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q8AWJZAL95;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Lumiere_iOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andypang1010.Lumiere-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A126F57A287EAE88003038B4 /* Build configuration list for PBXProject "Lumiere_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A126F591287EAE89003038B4 /* Debug */,
+				A126F592287EAE89003038B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A126F593287EAE89003038B4 /* Build configuration list for PBXNativeTarget "Lumiere_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A126F594287EAE89003038B4 /* Debug */,
+				A126F595287EAE89003038B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A126F577287EAE88003038B4 /* Project object */;
+}
