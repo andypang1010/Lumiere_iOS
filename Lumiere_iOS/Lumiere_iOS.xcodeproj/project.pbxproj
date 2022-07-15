@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11A16D8288049BF00A760EA /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A16D7288049BF00A760EA /* TabBarViewController.swift */; };
 		A126F583287EAE88003038B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F582287EAE88003038B4 /* AppDelegate.swift */; };
 		A126F585287EAE88003038B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F584287EAE88003038B4 /* SceneDelegate.swift */; };
 		A126F58C287EAE89003038B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A126F58B287EAE89003038B4 /* Assets.xcassets */; };
@@ -14,24 +15,28 @@
 		A126F597287EAEDB003038B4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F596287EAEDB003038B4 /* SignUpViewController.swift */; };
 		A126F599287EAF11003038B4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F598287EAF11003038B4 /* Utilities.swift */; };
 		A126F59B287EAF2E003038B4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F59A287EAF2E003038B4 /* LogInViewController.swift */; };
-		A126F59D287EAF46003038B4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F59C287EAF46003038B4 /* HomeViewController.swift */; };
 		A126F59F287EB1DB003038B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */; };
+		A12C3D91288179870078BFD9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D90288179870078BFD9 /* ProfileViewController.swift */; };
+		A12C3D93288179E10078BFD9 /* IMDbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D92288179E10078BFD9 /* IMDbViewController.swift */; };
+		A12C3D9528817A540078BFD9 /* MyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D9428817A540078BFD9 /* MyListViewController.swift */; };
 		E484AD5616491AAB1BACAE1F /* Pods_Lumiere_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2C6418E1EA0F602BF21BB26 /* Pods_Lumiere_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3CDFFEFF9BD5966F9F05BB95 /* Pods-Lumiere_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumiere_iOS.release.xcconfig"; path = "Target Support Files/Pods-Lumiere_iOS/Pods-Lumiere_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		A11A16D7288049BF00A760EA /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		A126F57F287EAE88003038B4 /* Lumiere_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lumiere_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A126F582287EAE88003038B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A126F584287EAE88003038B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A126F58B287EAE89003038B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A126F58E287EAE89003038B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A126F590287EAE89003038B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A126F596287EAEDB003038B4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A126F598287EAF11003038B4 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A126F59A287EAF2E003038B4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		A126F59C287EAF46003038B4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A12C3D90288179870078BFD9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A12C3D92288179E10078BFD9 /* IMDbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDbViewController.swift; sourceTree = "<group>"; };
+		A12C3D9428817A540078BFD9 /* MyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListViewController.swift; sourceTree = "<group>"; };
 		A2C6418E1EA0F602BF21BB26 /* Pods_Lumiere_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lumiere_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA22CD94054533FA609A3115 /* Pods-Lumiere_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumiere_iOS.debug.xcconfig"; path = "Target Support Files/Pods-Lumiere_iOS/Pods-Lumiere_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,13 +75,12 @@
 			isa = PBXGroup;
 			children = (
 				A126F582287EAE88003038B4 /* AppDelegate.swift */,
-				A126F598287EAF11003038B4 /* Utilities.swift */,
 				A126F584287EAE88003038B4 /* SceneDelegate.swift */,
+				A126F598287EAF11003038B4 /* Utilities.swift */,
 				A126F5A0287EB1E1003038B4 /* ViewControllers */,
-				A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */,
 				A126F58B287EAE89003038B4 /* Assets.xcassets */,
 				A126F58D287EAE89003038B4 /* LaunchScreen.storyboard */,
-				A126F590287EAE89003038B4 /* Info.plist */,
+				A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */,
 			);
 			path = Lumiere_iOS;
 			sourceTree = "<group>";
@@ -85,8 +89,11 @@
 			isa = PBXGroup;
 			children = (
 				A126F59A287EAF2E003038B4 /* LogInViewController.swift */,
-				A126F59C287EAF46003038B4 /* HomeViewController.swift */,
 				A126F596287EAEDB003038B4 /* SignUpViewController.swift */,
+				A11A16D7288049BF00A760EA /* TabBarViewController.swift */,
+				A12C3D9428817A540078BFD9 /* MyListViewController.swift */,
+				A12C3D92288179E10078BFD9 /* IMDbViewController.swift */,
+				A12C3D90288179870078BFD9 /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -97,7 +104,6 @@
 				AA22CD94054533FA609A3115 /* Pods-Lumiere_iOS.debug.xcconfig */,
 				3CDFFEFF9BD5966F9F05BB95 /* Pods-Lumiere_iOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -224,12 +230,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12C3D9528817A540078BFD9 /* MyListViewController.swift in Sources */,
 				A126F583287EAE88003038B4 /* AppDelegate.swift in Sources */,
 				A126F597287EAEDB003038B4 /* SignUpViewController.swift in Sources */,
+				A12C3D93288179E10078BFD9 /* IMDbViewController.swift in Sources */,
 				A126F599287EAF11003038B4 /* Utilities.swift in Sources */,
 				A126F59B287EAF2E003038B4 /* LogInViewController.swift in Sources */,
+				A11A16D8288049BF00A760EA /* TabBarViewController.swift in Sources */,
 				A126F585287EAE88003038B4 /* SceneDelegate.swift in Sources */,
-				A126F59D287EAF46003038B4 /* HomeViewController.swift in Sources */,
+				A12C3D91288179870078BFD9 /* ProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +381,7 @@
 				DEVELOPMENT_TEAM = Q8AWJZAL95;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lumiere_iOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Lumiere;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -400,6 +410,7 @@
 				DEVELOPMENT_TEAM = Q8AWJZAL95;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Lumiere_iOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Lumiere;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

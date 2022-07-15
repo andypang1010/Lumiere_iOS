@@ -12,12 +12,6 @@ import FirebaseFirestore
 class SignUpViewController : UIViewController {
     
     let db = Firestore.firestore()
-    
-    let titleFont = UIFont(name: "Avenir Black", size: 40)!
-    let textFont = UIFont(name: "Avenir Next", size: 20)!
-    let highlightTextFont = UIFont(name: "Avenir Medium", size: 20)!
-    let commentFont = UIFont(name: "Avenir Next", size: 15)!
-    let highlightCommentFont = UIFont(name: "Avenir Medium", size: 15)!
 
     var nameFieldLabel = UILabel()
     var nameTextField = UITextField()
@@ -33,13 +27,13 @@ class SignUpViewController : UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Background Color")
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
 
         nameFieldLabel = {
             let label = UILabel()
             label.text = "Full name"
             label.numberOfLines = 1
-            label.font = textFont
+            label.font = Utilities.textFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -48,7 +42,7 @@ class SignUpViewController : UIViewController {
             let textField = UITextField()
             textField.placeholder = "John Appleseed"
             textField.autocapitalizationType = .words
-            textField.font = textFont
+            textField.font = Utilities.textFont
             textField.textColor = UIColor(named: "Text Color")
             return textField
         }()
@@ -57,7 +51,7 @@ class SignUpViewController : UIViewController {
             let label = UILabel()
             label.text = "Email"
             label.numberOfLines = 1
-            label.font = textFont
+            label.font = Utilities.textFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -66,7 +60,7 @@ class SignUpViewController : UIViewController {
             let textField = UITextField()
             textField.placeholder = "example@example.com"
             textField.autocapitalizationType = .none
-            textField.font = textFont
+            textField.font = Utilities.textFont
             textField.textColor = UIColor(named: "Text Color")
             return textField
         }()
@@ -75,7 +69,7 @@ class SignUpViewController : UIViewController {
             let label = UILabel()
             label.text = "Password"
             label.numberOfLines = 1
-            label.font = textFont
+            label.font = Utilities.textFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -85,7 +79,7 @@ class SignUpViewController : UIViewController {
             textField.placeholder = "must have at least 8 characters"
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
-            textField.font = textFont
+            textField.font = Utilities.textFont
             textField.textColor = UIColor(named: "Text Color")
             return textField
         }()
@@ -94,7 +88,7 @@ class SignUpViewController : UIViewController {
             let label = UILabel()
             label.text = "Confirm password"
             label.numberOfLines = 1
-            label.font = textFont
+            label.font = Utilities.textFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -104,7 +98,7 @@ class SignUpViewController : UIViewController {
             textField.placeholder = "confirm password"
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
-            textField.font = textFont
+            textField.font = Utilities.textFont
             textField.textColor = UIColor(named: "Text Color")
             return textField
         }()
@@ -112,7 +106,7 @@ class SignUpViewController : UIViewController {
         signUpButton = {
             let button = UIButton()
             button.setTitle("Sign up", for: .normal)
-            button.titleLabel?.font = highlightTextFont
+            button.titleLabel?.font = Utilities.highlightTextFont
             button.setTitleColor(UIColor(named: "Text Color"), for: .normal)
             button.backgroundColor = UIColor(named: "Highlight Color")
             button.layer.cornerRadius = 10
@@ -209,8 +203,6 @@ class SignUpViewController : UIViewController {
             }
             
             // Dismiss sign-up screen
-            LogInViewController().emailTextField.text = emailTextField.text
-            LogInViewController().passwordTextField.text = passwordTextField.text
             dismiss(animated: true)
         }
     }

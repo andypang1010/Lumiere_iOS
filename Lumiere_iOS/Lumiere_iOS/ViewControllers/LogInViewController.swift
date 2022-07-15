@@ -10,12 +10,6 @@ import FirebaseAuth
 
 class LogInViewController: UIViewController {
     
-    let titleFont = UIFont(name: "Avenir Black", size: 40)!
-    let textFont = UIFont(name: "Avenir Next", size: 20)!
-    let highlightTextFont = UIFont(name: "Avenir Medium", size: 20)!
-    let commentFont = UIFont(name: "Avenir Next", size: 15)!
-    let highlightCommentFont = UIFont(name: "Avenir Medium", size: 15)!
-    
     var emailFieldLabel = UILabel()
     var emailTextField = UITextField()
     var passwordFieldLabel = UILabel()
@@ -29,14 +23,14 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Background Color")
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
         title = "Log in"
 
         emailFieldLabel = {
             let label = UILabel()
             label.text = "Email"
             label.numberOfLines = 1
-            label.font = textFont
+            label.font = Utilities.textFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -45,7 +39,7 @@ class LogInViewController: UIViewController {
             let textField = UITextField()
             textField.placeholder = "example@example.com"
             textField.autocapitalizationType = .none
-            textField.font = textFont
+            textField.font = Utilities.textFont
             textField.textColor = UIColor(named: "Text Color")
             return textField
         }()
@@ -54,7 +48,7 @@ class LogInViewController: UIViewController {
             let label = UILabel()
             label.text = "Password"
             label.numberOfLines = 1
-            label.font = textFont
+            label.font = Utilities.textFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -64,7 +58,7 @@ class LogInViewController: UIViewController {
             textField.placeholder = "password"
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
-            textField.font = textFont
+            textField.font = Utilities.textFont
             textField.textColor = UIColor(named: "Text Color")
             return textField
         }()
@@ -72,7 +66,7 @@ class LogInViewController: UIViewController {
         logInButton = {
             let button = UIButton()
             button.setTitle("Log in", for: .normal)
-            button.titleLabel?.font = highlightTextFont
+            button.titleLabel?.font = Utilities.highlightTextFont
             button.setTitleColor(UIColor(named: "Text Color"), for: .normal)
             button.backgroundColor = UIColor(named: "Highlight Color")
             button.layer.cornerRadius = 10
@@ -83,7 +77,7 @@ class LogInViewController: UIViewController {
         signUpLabel = {
             let label = UILabel()
             label.text = "Don't have an account?"
-            label.font = commentFont
+            label.font = Utilities.commentFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -91,7 +85,7 @@ class LogInViewController: UIViewController {
         signUpButton = {
             let button = UIButton()
             button.setTitle("Sign Up", for: .normal)
-            button.titleLabel?.font = highlightCommentFont
+            button.titleLabel?.font = Utilities.highlightCommentFont
             button.setTitleColor(UIColor(named: "Highlight Color"), for: .normal)
             button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
             return button
@@ -168,7 +162,7 @@ class LogInViewController: UIViewController {
                 Utilities.showAlert(error!.localizedDescription, self)
             }
             else {
-                self.navigationController?.pushViewController(HomeViewController(), animated: true)
+                self.navigationController?.pushViewController(TabBarViewController(), animated: true)
             }
         }
     }
