@@ -15,25 +15,25 @@ class TabBarViewController : UIViewController {
         
         let tabBarViewController = UITabBarController()
         tabBarViewController.tabBar.tintColor = UIColor(named: "Highlight Color")
-        tabBarViewController.tabBarItem.setTitleTextAttributes([.font: Utilities.commentFont], for: .normal)
+        tabBarViewController.tabBarItem.setTitleTextAttributes([.font: Utilities.tabBarFont], for: .normal)
         
-        let myListViewController = UINavigationController(rootViewController: MyListViewController())
-        myListViewController.title = "My List"
+        let watchedListViewController = UINavigationController(rootViewController: WatchedListViewController())
+        watchedListViewController.title = "Watched"
         
-        let IMDbViewController = UINavigationController(rootViewController: IMDbViewController())
-        IMDbViewController.title = "IMDb"
+        let wishlistViewController = UINavigationController(rootViewController: WishlistViewController())
+        wishlistViewController.title = "Wishlist"
         
         let profileViewController = UINavigationController(rootViewController: ProfileViewController())
         profileViewController.title = "Profile"
         
-        tabBarViewController.setViewControllers([myListViewController, IMDbViewController, profileViewController], animated: false)
+        tabBarViewController.setViewControllers([watchedListViewController, wishlistViewController, profileViewController], animated: false)
         tabBarViewController.modalPresentationStyle = .fullScreen
         
         guard let icons = tabBarViewController.tabBar.items else {
             return
         }
 
-        let iconsImage = ["list.bullet.circle", "film.circle", "person.circle"]
+        let iconsImage = ["list.bullet.circle", "star.circle", "person.circle"]
 
         for i in 0..<icons.count {
             icons[i].image = UIImage(systemName: iconsImage[i])
@@ -46,7 +46,6 @@ class TabBarViewController : UIViewController {
         self.navigationItem.hidesBackButton = true;
         self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
         self.navigationController!.interactivePopGestureRecognizer!.isEnabled = false;
-        
     }
     
 }

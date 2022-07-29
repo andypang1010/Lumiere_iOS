@@ -17,8 +17,11 @@
 		A126F59B287EAF2E003038B4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F59A287EAF2E003038B4 /* LogInViewController.swift */; };
 		A126F59F287EB1DB003038B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */; };
 		A12C3D91288179870078BFD9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D90288179870078BFD9 /* ProfileViewController.swift */; };
-		A12C3D93288179E10078BFD9 /* IMDbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D92288179E10078BFD9 /* IMDbViewController.swift */; };
-		A12C3D9528817A540078BFD9 /* MyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D9428817A540078BFD9 /* MyListViewController.swift */; };
+		A12C3D9528817A540078BFD9 /* WatchedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D9428817A540078BFD9 /* WatchedListViewController.swift */; };
+		A12C3D972881DA480078BFD9 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D962881DA480078BFD9 /* Movie.swift */; };
+		A12C3D992881E4120078BFD9 /* AddWatchedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D982881E4120078BFD9 /* AddWatchedViewController.swift */; };
+		A12C3D9B2882C8300078BFD9 /* WishlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D9A2882C8300078BFD9 /* WishlistViewController.swift */; };
+		A12C3D9D2882C96A0078BFD9 /* AddWishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12C3D9C2882C96A0078BFD9 /* AddWishViewController.swift */; };
 		E484AD5616491AAB1BACAE1F /* Pods_Lumiere_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2C6418E1EA0F602BF21BB26 /* Pods_Lumiere_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +38,11 @@
 		A126F59A287EAF2E003038B4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		A126F59E287EB1DB003038B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A12C3D90288179870078BFD9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		A12C3D92288179E10078BFD9 /* IMDbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDbViewController.swift; sourceTree = "<group>"; };
-		A12C3D9428817A540078BFD9 /* MyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListViewController.swift; sourceTree = "<group>"; };
+		A12C3D9428817A540078BFD9 /* WatchedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchedListViewController.swift; sourceTree = "<group>"; };
+		A12C3D962881DA480078BFD9 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		A12C3D982881E4120078BFD9 /* AddWatchedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWatchedViewController.swift; sourceTree = "<group>"; };
+		A12C3D9A2882C8300078BFD9 /* WishlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewController.swift; sourceTree = "<group>"; };
+		A12C3D9C2882C96A0078BFD9 /* AddWishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWishViewController.swift; sourceTree = "<group>"; };
 		A2C6418E1EA0F602BF21BB26 /* Pods_Lumiere_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lumiere_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA22CD94054533FA609A3115 /* Pods-Lumiere_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumiere_iOS.debug.xcconfig"; path = "Target Support Files/Pods-Lumiere_iOS/Pods-Lumiere_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +83,7 @@
 				A126F582287EAE88003038B4 /* AppDelegate.swift */,
 				A126F584287EAE88003038B4 /* SceneDelegate.swift */,
 				A126F598287EAF11003038B4 /* Utilities.swift */,
+				A12C3D962881DA480078BFD9 /* Movie.swift */,
 				A126F5A0287EB1E1003038B4 /* ViewControllers */,
 				A126F58B287EAE89003038B4 /* Assets.xcassets */,
 				A126F58D287EAE89003038B4 /* LaunchScreen.storyboard */,
@@ -88,14 +95,48 @@
 		A126F5A0287EB1E1003038B4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A126F59A287EAF2E003038B4 /* LogInViewController.swift */,
-				A126F596287EAEDB003038B4 /* SignUpViewController.swift */,
-				A11A16D7288049BF00A760EA /* TabBarViewController.swift */,
-				A12C3D9428817A540078BFD9 /* MyListViewController.swift */,
-				A12C3D92288179E10078BFD9 /* IMDbViewController.swift */,
-				A12C3D90288179870078BFD9 /* ProfileViewController.swift */,
+				A12C3D9E2882E2DD0078BFD9 /* AuthenticationViewControllers */,
+				A12C3D9F2882E2F40078BFD9 /* TabsViewControllers */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A12C3D9E2882E2DD0078BFD9 /* AuthenticationViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A126F59A287EAF2E003038B4 /* LogInViewController.swift */,
+				A126F596287EAEDB003038B4 /* SignUpViewController.swift */,
+			);
+			path = AuthenticationViewControllers;
+			sourceTree = "<group>";
+		};
+		A12C3D9F2882E2F40078BFD9 /* TabsViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A11A16D7288049BF00A760EA /* TabBarViewController.swift */,
+				A12C3DA12882E3450078BFD9 /* WatchedListViewControllers */,
+				A12C3DA02882E3350078BFD9 /* WishlistViewControllers */,
+				A12C3D90288179870078BFD9 /* ProfileViewController.swift */,
+			);
+			path = TabsViewControllers;
+			sourceTree = "<group>";
+		};
+		A12C3DA02882E3350078BFD9 /* WishlistViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A12C3D9A2882C8300078BFD9 /* WishlistViewController.swift */,
+				A12C3D9C2882C96A0078BFD9 /* AddWishViewController.swift */,
+			);
+			path = WishlistViewControllers;
+			sourceTree = "<group>";
+		};
+		A12C3DA12882E3450078BFD9 /* WatchedListViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A12C3D9428817A540078BFD9 /* WatchedListViewController.swift */,
+				A12C3D982881E4120078BFD9 /* AddWatchedViewController.swift */,
+			);
+			path = WatchedListViewControllers;
 			sourceTree = "<group>";
 		};
 		CD679B3AEBFEB8B929F161C4 /* Pods */ = {
@@ -230,10 +271,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A12C3D9528817A540078BFD9 /* MyListViewController.swift in Sources */,
+				A12C3D9528817A540078BFD9 /* WatchedListViewController.swift in Sources */,
+				A12C3D9D2882C96A0078BFD9 /* AddWishViewController.swift in Sources */,
+				A12C3D9B2882C8300078BFD9 /* WishlistViewController.swift in Sources */,
+				A12C3D992881E4120078BFD9 /* AddWatchedViewController.swift in Sources */,
 				A126F583287EAE88003038B4 /* AppDelegate.swift in Sources */,
 				A126F597287EAEDB003038B4 /* SignUpViewController.swift in Sources */,
-				A12C3D93288179E10078BFD9 /* IMDbViewController.swift in Sources */,
+				A12C3D972881DA480078BFD9 /* Movie.swift in Sources */,
 				A126F599287EAF11003038B4 /* Utilities.swift in Sources */,
 				A126F59B287EAF2E003038B4 /* LogInViewController.swift in Sources */,
 				A11A16D8288049BF00A760EA /* TabBarViewController.swift in Sources */,

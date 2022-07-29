@@ -6,9 +6,19 @@
 //
 
 import UIKit
-import Foundation
+import FirebaseFirestore
+import FirebaseAuth
 
 class Utilities {
+    static let database = Firestore.firestore()
+    static let userDocReference = database.collection("users").document((Auth.auth().currentUser?.email)!)
+    
+    static let titleFont = UIFont(name: "Avenir Black", size: 40)!
+    static let textFont = UIFont(name: "Avenir Next", size: 20)!
+    static let highlightTextFont = UIFont(name: "Avenir Black", size: 20)!
+    static let commentFont = UIFont(name: "Avenir Next", size: 15)!
+    static let highlightCommentFont = UIFont(name: "Avenir Black", size: 15)!
+    static let tabBarFont = UIFont(name: "Avenir Next", size: 12)!
     
     /// Checks if the password complies with the specified Regex
     /// - Parameter userPassword: The password that the user passed to the text field
@@ -28,10 +38,4 @@ class Utilities {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         viewController.present(alert, animated: true, completion: nil)
     }
-    
-    static let titleFont = UIFont(name: "Avenir Black", size: 40)!
-    static let textFont = UIFont(name: "Avenir Next", size: 20)!
-    static let highlightTextFont = UIFont(name: "Avenir Black", size: 20)!
-    static let commentFont = UIFont(name: "Avenir Next", size: 15)!
-    static let highlightCommentFont = UIFont(name: "Avenir Black", size: 15)!
 }

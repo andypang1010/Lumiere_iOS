@@ -24,13 +24,21 @@ class LogInViewController: UIViewController {
         view.backgroundColor = UIColor(named: "Background Color")
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
-        title = "Log in"
+        title = "Log In"
 
+        // Disable moving back to login/sign-up screen
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = true;
+        self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
+        self.navigationController!.interactivePopGestureRecognizer!.isEnabled = false;
+        
+        self.tabBarController?.tabBar.isHidden = true
+        
         emailFieldLabel = {
             let label = UILabel()
             label.text = "Email"
             label.numberOfLines = 1
-            label.font = Utilities.textFont
+            label.font = Utilities.highlightTextFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -48,7 +56,7 @@ class LogInViewController: UIViewController {
             let label = UILabel()
             label.text = "Password"
             label.numberOfLines = 1
-            label.font = Utilities.textFont
+            label.font = Utilities.highlightTextFont
             label.textColor = UIColor(named: "Text Color")
             return label
         }()
@@ -70,7 +78,7 @@ class LogInViewController: UIViewController {
             button.setTitleColor(UIColor(named: "Text Color"), for: .normal)
             button.backgroundColor = UIColor(named: "Highlight Color")
             button.layer.cornerRadius = 10
-            button.addTarget(self, action: #selector(loginInButtonTapped), for: .touchUpInside)
+            button.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
             return button
         }()
         
@@ -155,7 +163,7 @@ class LogInViewController: UIViewController {
         present(navigationViewController, animated: true, completion: nil)
     }
     
-    @objc func loginInButtonTapped() {
+    @objc func logInButtonTapped() {
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) {
             (result, error) in
             if (error != nil) {
