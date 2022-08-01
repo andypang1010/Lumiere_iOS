@@ -14,10 +14,10 @@ class TabBarViewController : UIViewController {
         super.viewDidLoad()
         
         let tabBarViewController = UITabBarController()
-        tabBarViewController.tabBar.tintColor = UIColor(named: "Highlight Color")
-        tabBarViewController.tabBarItem.setTitleTextAttributes([.font: Utilities.tabBarFont], for: .normal)
+        tabBarViewController.tabBar.tintColor = Utilities.highlightColor
+        UITabBarItem.appearance().setTitleTextAttributes([.font: Utilities.tabBarFont], for: .normal)
         
-        let watchedListViewController = UINavigationController(rootViewController: WatchedListViewController())
+        let watchedListViewController = UINavigationController(rootViewController: WatchedViewController())
         watchedListViewController.title = "Watched"
         
         let wishlistViewController = UINavigationController(rootViewController: WishlistViewController())
@@ -33,8 +33,8 @@ class TabBarViewController : UIViewController {
             return
         }
 
+        // Set the image of each tab bar icon
         let iconsImage = ["list.bullet.circle", "star.circle", "person.circle"]
-
         for i in 0..<icons.count {
             icons[i].image = UIImage(systemName: iconsImage[i])
         }

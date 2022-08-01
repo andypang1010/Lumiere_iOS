@@ -21,9 +21,10 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "Background Color")
+        view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
+        navigationController?.navigationBar.backgroundColor = Utilities.backgroundColor
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
         title = "Log In"
 
         // Disable moving back to login/sign-up screen
@@ -39,7 +40,7 @@ class LogInViewController: UIViewController {
             label.text = "Email"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -48,7 +49,10 @@ class LogInViewController: UIViewController {
             textField.placeholder = "example@example.com"
             textField.autocapitalizationType = .none
             textField.font = Utilities.textFont
-            textField.textColor = UIColor(named: "Text Color")
+            textField.textColor = Utilities.textColor
+            textField.delegate = self
+            textField.keyboardType = UIKeyboardType.emailAddress
+            textField.returnKeyType = .continue
             return textField
         }()
         
@@ -57,7 +61,7 @@ class LogInViewController: UIViewController {
             label.text = "Password"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -67,7 +71,9 @@ class LogInViewController: UIViewController {
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
             textField.font = Utilities.textFont
-            textField.textColor = UIColor(named: "Text Color")
+            textField.textColor = Utilities.textColor
+            textField.delegate = self
+            textField.returnKeyType = .done
             return textField
         }()
         
@@ -75,8 +81,8 @@ class LogInViewController: UIViewController {
             let button = UIButton()
             button.setTitle("Log in", for: .normal)
             button.titleLabel?.font = Utilities.highlightTextFont
-            button.setTitleColor(UIColor(named: "Text Color"), for: .normal)
-            button.backgroundColor = UIColor(named: "Highlight Color")
+            button.setTitleColor(Utilities.textColor, for: .normal)
+            button.backgroundColor = Utilities.highlightColor
             button.layer.cornerRadius = 10
             button.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
             return button
@@ -86,7 +92,7 @@ class LogInViewController: UIViewController {
             let label = UILabel()
             label.text = "Don't have an account?"
             label.font = Utilities.commentFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -94,7 +100,7 @@ class LogInViewController: UIViewController {
             let button = UIButton()
             button.setTitle("Sign Up", for: .normal)
             button.titleLabel?.font = Utilities.highlightCommentFont
-            button.setTitleColor(UIColor(named: "Highlight Color"), for: .normal)
+            button.setTitleColor(Utilities.highlightColor, for: .normal)
             button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
             return button
         }()
@@ -111,10 +117,7 @@ class LogInViewController: UIViewController {
         signUpStackView.addArrangedSubview(signUpLabel)
         signUpStackView.addArrangedSubview(signUpButton)
         
-        [emailFieldLabel, emailTextField, passwordFieldLabel, passwordTextField, logInButton, signUpStackView].forEach{subView in
-            subView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(subView)
-        }
+        Utilities.addViews([emailFieldLabel, emailTextField, passwordFieldLabel, passwordTextField, logInButton, signUpStackView], view)
 
         setUpConstraints()
         
@@ -146,7 +149,7 @@ class LogInViewController: UIViewController {
         NSLayoutConstraint.activate([
             logInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logInButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-            logInButton.widthAnchor.constraint(equalToConstant: 90)
+            logInButton.widthAnchor.constraint(equalToConstant: 100)
         ])
         
         NSLayoutConstraint.activate([
@@ -155,6 +158,7 @@ class LogInViewController: UIViewController {
         ])
     }
 
+    // Present the Sign Up view controller
     @objc func signUpButtonTapped() {
         let signUpViewController = SignUpViewController()
         signUpViewController.title = "Sign up"
@@ -164,14 +168,30 @@ class LogInViewController: UIViewController {
     }
     
     @objc func logInButtonTapped() {
+        // Sign in with the provided email and password
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) {
             (result, error) in
             if (error != nil) {
                 Utilities.showAlert(error!.localizedDescription, self)
             }
             else {
+                // Push the Tab Bar view controller
                 self.navigationController?.pushViewController(TabBarViewController(), animated: true)
             }
         }
+    }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            textField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+        }
+        else if textField == passwordTextField {
+            textField.resignFirstResponder()
+            logInButtonTapped()
+        }
+        return true
     }
 }

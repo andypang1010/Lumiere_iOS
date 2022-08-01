@@ -19,6 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
             let window = UIWindow(windowScene: windowScene)
+        
+            if #available(iOS 11.0, *) {
+                window.overrideUserInterfaceStyle = .dark
+            }
+        
             if Auth.auth().currentUser != nil {
                 window.rootViewController = UINavigationController(rootViewController: TabBarViewController())
             }
@@ -26,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window.rootViewController = UINavigationController(rootViewController: LogInViewController())
 
             }
+
             self.window = window
             window.makeKeyAndVisible()
 

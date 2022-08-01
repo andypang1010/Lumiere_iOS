@@ -17,24 +17,32 @@ class AddWatchedViewController: UIViewController {
     var ratingSlider = UISlider()
     var likedMovie = false
     var hasLikedButton = UIButton()
+    var date = String()
     var dateWatchedPickerLabel = UILabel()
-    var date = ""
     var dateWatchedPicker = UIDatePicker()
-    var addButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "Background Color")
+        view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
         title = "Add Watched"
+        
+        // Like button
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(likedMovieButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = Utilities.highlightColor
+        
+        // Add button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addWatchedButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
         titleFieldLabel = {
             let label = UILabel()
             label.text = "Title"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -43,7 +51,9 @@ class AddWatchedViewController: UIViewController {
             textField.placeholder = "\"Jurassic Park\""
             textField.autocapitalizationType = .none
             textField.font = Utilities.textFont
-            textField.textColor = UIColor(named: "Text Color")
+            textField.textColor = Utilities.textColor
+            textField.delegate = self
+            textField.returnKeyType = .continue
             return textField
         }()
         
@@ -52,7 +62,7 @@ class AddWatchedViewController: UIViewController {
             label.text = "Rating: 0.0"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -61,22 +71,19 @@ class AddWatchedViewController: UIViewController {
             slider.minimumValue = 0
             slider.maximumValue = 10
             slider.isContinuous = true
-            slider.thumbTintColor = UIColor(named: "Text Color")
-            slider.tintColor = UIColor(named: "Highlight Color")
+            slider.thumbTintColor = Utilities.textColor
+            slider.tintColor = Utilities.highlightColor
             slider.setValue(0, animated: false)
             slider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged)
             return slider
         }()
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(likedMovieButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "Highlight Color")
         
         dateWatchedPickerLabel = {
             let label = UILabel()
             label.text = "Date watched"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -89,21 +96,7 @@ class AddWatchedViewController: UIViewController {
             return datePicker
         }()
         
-        addButton = {
-            let button = UIButton()
-            button.setTitle("Add", for: .normal)
-            button.titleLabel?.font = Utilities.highlightTextFont
-            button.setTitleColor(UIColor(named: "Text Color"), for: .normal)
-            button.backgroundColor = UIColor(named: "Highlight Color")
-            button.layer.cornerRadius = 10
-            button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-            return button
-        }()
-        
-        [titleFieldLabel, titleTextField, ratingSliderLabel, ratingSlider, dateWatchedPickerLabel, dateWatchedPicker, addButton].forEach { subView in
-            subView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(subView)
-        }
+        Utilities.addViews([titleFieldLabel, titleTextField, ratingSliderLabel, ratingSlider, dateWatchedPickerLabel, dateWatchedPicker], view)
         
         setUpConstraints()
     }
@@ -141,49 +134,61 @@ class AddWatchedViewController: UIViewController {
             dateWatchedPicker.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
             dateWatchedPicker.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
         ])
-        
-        NSLayoutConstraint.activate([
-            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            addButton.widthAnchor.constraint(equalToConstant: 90)
-        ])
     }
     
+    // Display the numeric value of the slider rounded to 1 decimal point
     @objc func sliderChanged(_ sender: UISlider) {
         let sliderValue = round(ratingSlider.value * 10) / 10
         ratingSliderLabel.text = "Rating: \(sliderValue)"
     }
     
+    // Negate the current likedMovie state
     @objc func likedMovieButtonTapped() {
         likedMovie = !likedMovie
         if (likedMovie == true) {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
+            navigationItem.leftBarButtonItem?.image = UIImage(systemName: "heart.fill")
         }
         else {
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
+            navigationItem.leftBarButtonItem?.image = UIImage(systemName: "heart")
         }
     }
     
+    
+    /// Format the date by MMMM DD YYYY
+    /// - Parameter datePicker: A UIDatePicker object
     @objc func datePickerToggled(_ datePicker: UIDatePicker) {
-        date = formatDate(datePicker.date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM dd yyyy"
+        date = dateFormatter.string(from: datePicker.date)
     }
     
-    @objc func addButtonTapped() {
+    
+    // Create a document with the provided title, rating, date, and state of hasLiked
+    @objc func addWatchedButtonTapped() {
         let error = validateTitle()
         
         if (error != nil) {
             Utilities.showAlert(error!, self)
         }
         else {
-            Utilities.userDocReference.collection("watchedList").addDocument(data: ["title":titleTextField.text!, "rating":round(ratingSlider.value * 10) / 10, "hasLiked":likedMovie, "date":dateWatchedPicker.date])
+            Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").addDocument(data: ["title":titleTextField.text!, "rating":round(ratingSlider.value * 10) / 10, "hasLiked":likedMovie, "date":dateWatchedPicker.date])
             
             self.dismiss(animated: true)
         }
     }
     
-    func formatDate(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd yyyy"
-        return dateFormatter.string(from: date)
+    func validateTitle() -> String? {
+        if (titleTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
+            return "Title can't be left empty"
+        }
+        
+        return nil
+    }
+}
+
+extension AddWatchedViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

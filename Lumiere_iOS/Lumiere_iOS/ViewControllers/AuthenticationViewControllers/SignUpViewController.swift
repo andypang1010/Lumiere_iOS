@@ -17,22 +17,27 @@ class SignUpViewController : UIViewController {
     var passwordTextField = UITextField()
     var confirmPasswordFieldLabel = UILabel()
     var confirmPasswordTextField = UITextField()
-    var passwordRulesTextView = UILabel()
-    var signUpButton = UIButton()
+    var passwordConstraintsLabel = UILabel()
+    var passwordConstraintsTextView = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "Background Color")
+        view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
+        navigationController?.navigationBar.backgroundColor = Utilities.backgroundColor
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
         title = "Sign Up"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(signUpButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
         emailFieldLabel = {
             let label = UILabel()
             label.text = "Email"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -41,7 +46,10 @@ class SignUpViewController : UIViewController {
             textField.placeholder = "example@example.com"
             textField.autocapitalizationType = .none
             textField.font = Utilities.textFont
-            textField.textColor = UIColor(named: "Text Color")
+            textField.textColor = Utilities.textColor
+            textField.delegate = self
+            textField.keyboardType = UIKeyboardType.emailAddress
+            textField.returnKeyType = .continue
             return textField
         }()
         
@@ -50,7 +58,7 @@ class SignUpViewController : UIViewController {
             label.text = "Password"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -60,7 +68,9 @@ class SignUpViewController : UIViewController {
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
             textField.font = Utilities.textFont
-            textField.textColor = UIColor(named: "Text Color")
+            textField.textColor = Utilities.textColor
+            textField.delegate = self
+            textField.returnKeyType = .continue
             return textField
         }()
         
@@ -69,7 +79,7 @@ class SignUpViewController : UIViewController {
             label.text = "Confirm password"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -79,41 +89,38 @@ class SignUpViewController : UIViewController {
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
             textField.font = Utilities.textFont
-            textField.textColor = UIColor(named: "Text Color")
+            textField.textColor = Utilities.textColor
+            textField.delegate = self
+            textField.returnKeyType = .done
             return textField
         }()
         
-        passwordRulesTextView = {
-           let label = UILabel()
-            label.text = "1. Password must have at least eight characters \n2. Password must contain a big letter \n3. Password must contain a small letter \n4. Password must contain a number"
-            label.font = Utilities.commentFont
-            label.textColor = UIColor(named: "Text Color")
-            
-            label.numberOfLines = 4
+        passwordConstraintsLabel = {
+            let label = UILabel()
+            label.text = "Password Constraints:"
+            label.numberOfLines = 1
+            label.font = Utilities.highlightCommentFont
+            label.textColor = Utilities.textColor
             return label
         }()
         
-        signUpButton = {
-            let button = UIButton()
-            button.setTitle("Sign up", for: .normal)
-            button.titleLabel?.font = Utilities.highlightTextFont
-            button.setTitleColor(UIColor(named: "Text Color"), for: .normal)
-            button.backgroundColor = UIColor(named: "Highlight Color")
-            button.layer.cornerRadius = 10
-            button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-            return button
+        passwordConstraintsTextView = {
+           let label = UILabel()
+            label.text = "1. Password must have at least eight characters \n2. Password must contain a big letter \n3. Password must contain a small letter \n4. Password must contain a number"
+            label.font = Utilities.commentFont
+            label.textColor = Utilities.textColor
+            label.numberOfLines = 4
+            return label
         }()
 
-        [emailFieldLabel, emailTextField, passwordFieldLabel, passwordTextField, confirmPasswordFieldLabel, confirmPasswordTextField, passwordRulesTextView, signUpButton].forEach{subView in
-            subView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(subView)
-        }
+        Utilities.addViews([emailFieldLabel, emailTextField, passwordFieldLabel, passwordTextField, confirmPasswordFieldLabel, confirmPasswordTextField, passwordConstraintsLabel, passwordConstraintsTextView], view)
         
         setUpConstraints()
         
     }
     
     func setUpConstraints() {
+        
         NSLayoutConstraint.activate([
             emailFieldLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             emailFieldLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30)
@@ -148,16 +155,17 @@ class SignUpViewController : UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            passwordRulesTextView.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 50),
-            passwordRulesTextView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            passwordRulesTextView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
+            passwordConstraintsLabel.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 40),
+            passwordConstraintsLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
         ])
         
         NSLayoutConstraint.activate([
-            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signUpButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            signUpButton.widthAnchor.constraint(equalToConstant: 100)
+            passwordConstraintsTextView.topAnchor.constraint(equalTo: passwordConstraintsLabel.bottomAnchor, constant: 10),
+            passwordConstraintsTextView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
+            passwordConstraintsTextView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
         ])
+        
+
     }
     
     @objc func signUpButtonTapped() {
@@ -186,7 +194,6 @@ class SignUpViewController : UIViewController {
                     }
                 }
             }
-            
             // Dismiss sign-up screen
             dismiss(animated: true)
         }
@@ -217,5 +224,23 @@ class SignUpViewController : UIViewController {
         }
         
         return nil
+    }
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            textField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+        }
+        else if textField == passwordTextField {
+            textField.resignFirstResponder()
+            confirmPasswordTextField.becomeFirstResponder()
+        }
+        else if textField == confirmPasswordTextField {
+            textField.resignFirstResponder()
+            signUpButtonTapped()
+        }
+        return true
     }
 }

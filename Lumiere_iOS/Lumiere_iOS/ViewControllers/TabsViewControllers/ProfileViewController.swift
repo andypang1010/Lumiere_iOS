@@ -17,17 +17,18 @@ class ProfileViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "Background Color")
+        view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
+        navigationController?.navigationBar.backgroundColor = Utilities.backgroundColor
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
         title = "Profile"
         
         emailLabel = {
             let label = UILabel()
             label.text = Auth.auth().currentUser?.email
             label.numberOfLines = 1
-            label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.font = Utilities.largeFont
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -36,7 +37,7 @@ class ProfileViewController : UIViewController {
             label.text = "UID: \(Auth.auth().currentUser!.uid)"
             label.numberOfLines = 1
             label.font = Utilities.commentFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -44,21 +45,16 @@ class ProfileViewController : UIViewController {
           let button = UIButton()
             button.setTitle("Log out", for: .normal)
             button.titleLabel?.font = Utilities.highlightTextFont
-            button.setTitleColor(UIColor(named: "Text Color"), for: .normal)
-            button.backgroundColor = UIColor(named: "Highlight Color")
+            button.setTitleColor(Utilities.textColor, for: .normal)
+            button.backgroundColor = Utilities.highlightColor
             button.layer.cornerRadius = 10
             button.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
             return button
         }()
         
-        [emailLabel, uidLabel, logOutButton].forEach{subView in
-            subView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(subView)
-        }
+        Utilities.addViews([emailLabel, uidLabel, logOutButton], view)
         
         setUpConstraints()
-        
-        // Code goes here...
     }
     
     func setUpConstraints() {
@@ -75,10 +71,11 @@ class ProfileViewController : UIViewController {
         NSLayoutConstraint.activate([
             logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logOutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-            logOutButton.widthAnchor.constraint(equalToConstant: 90)
+            logOutButton.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
+    // Sign out of the current user and return to the Log In view controller
     @objc func logOutButtonTapped() {
         do {
             try Auth.auth().signOut()

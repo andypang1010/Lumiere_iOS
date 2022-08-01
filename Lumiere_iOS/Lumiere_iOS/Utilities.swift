@@ -11,13 +11,19 @@ import FirebaseAuth
 
 class Utilities {
     static let database = Firestore.firestore()
-    static let userDocReference = database.collection("users").document((Auth.auth().currentUser?.email)!)
+    static let usersCollectionReference = database.collection("users")
+    
+    static let textColor = UIColor(named: "Text Color")
+    static let highlightColor = UIColor(named: "Highlight Color")
+    static let boxColor = UIColor(named: "Box Color")
+    static let backgroundColor = UIColor(named: "Background Color")
     
     static let titleFont = UIFont(name: "Avenir Black", size: 40)!
+    static let largeFont = UIFont(name: "Avenir Black", size: 25)!
     static let textFont = UIFont(name: "Avenir Next", size: 20)!
     static let highlightTextFont = UIFont(name: "Avenir Black", size: 20)!
-    static let commentFont = UIFont(name: "Avenir Next", size: 15)!
-    static let highlightCommentFont = UIFont(name: "Avenir Black", size: 15)!
+    static let commentFont = UIFont(name: "Avenir Next", size: 14)!
+    static let highlightCommentFont = UIFont(name: "Avenir Black", size: 14)!
     static let tabBarFont = UIFont(name: "Avenir Next", size: 12)!
     
     /// Checks if the password complies with the specified Regex
@@ -37,5 +43,18 @@ class Utilities {
         let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         viewController.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    /// Adds all UIView subviews to a designated view
+    /// - Parameters:
+    ///   - views: An array of subviews in a view controller
+    ///   - view: The designated view that the subviews are added to
+    static func addViews(_ views: [UIView], _ view: UIView) {
+        views.forEach {
+            subView in
+            subView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(subView)
+        }
     }
 }

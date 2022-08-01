@@ -7,26 +7,30 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class AddWishViewController: UIViewController {
     
     var titleFieldLabel = UILabel()
     var titleTextField = UITextField()
-    var addButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "Background Color")
+        view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: UIColor(named: "Text Color")!]
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
         title = "Add Wish"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addWishButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
         titleFieldLabel = {
             let label = UILabel()
             label.text = "Title"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
-            label.textColor = UIColor(named: "Text Color")
+            label.textColor = Utilities.textColor
             return label
         }()
         
@@ -35,25 +39,12 @@ class AddWishViewController: UIViewController {
             textField.placeholder = "\"Jurassic Park\""
             textField.autocapitalizationType = .none
             textField.font = Utilities.textFont
-            textField.textColor = UIColor(named: "Text Color")
+            textField.textColor = Utilities.textColor
+            textField.delegate = self
             return textField
         }()
         
-        addButton = {
-            let button = UIButton()
-            button.setTitle("Add", for: .normal)
-            button.titleLabel?.font = Utilities.highlightTextFont
-            button.setTitleColor(UIColor(named: "Text Color"), for: .normal)
-            button.backgroundColor = UIColor(named: "Highlight Color")
-            button.layer.cornerRadius = 10
-            button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-            return button
-        }()
-        
-        [titleFieldLabel, titleTextField, addButton].forEach { subView in
-            subView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(subView)
-        }
+        Utilities.addViews([titleFieldLabel, titleTextField], view)
         
         setUpConstraints()
     }
@@ -69,12 +60,6 @@ class AddWishViewController: UIViewController {
             titleTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
             titleTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
         ])
-        
-        NSLayoutConstraint.activate([
-            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            addButton.widthAnchor.constraint(equalToConstant: 90)
-        ])
     }
     
     func validateTitle() -> String? {
@@ -85,17 +70,24 @@ class AddWishViewController: UIViewController {
         return nil
     }
     
-    @objc func addButtonTapped() {
+    @objc func addWishButtonTapped() {
         let error = validateTitle()
         
         if (error != nil) {
             Utilities.showAlert(error!, self)
         }
         else {
-            Utilities.userDocReference.collection("wishlist").addDocument(data: ["title":titleTextField.text!])
+            Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").addDocument(data: ["title":titleTextField.text!])
             
             self.dismiss(animated: true)
         }
         
+    }
+}
+
+extension AddWishViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
