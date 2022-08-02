@@ -12,15 +12,13 @@ class Watched {
     var hasLiked: Bool
     var date: Date
     var rating: Float
+    var id: String
     
-    init(title: String, hasLiked: Bool, date: Date, rating: Float) {
+    init(title: String, hasLiked: Bool, date: Date, rating: Float, id: String) {
         self.title = title
         self.hasLiked = hasLiked
         self.date = date
         self.rating = rating
-    }
-    
-    func toString() -> String {
-        return "[\(title), \(hasLiked), \(date), \(rating)]"
+        self.id = id
     }
 }

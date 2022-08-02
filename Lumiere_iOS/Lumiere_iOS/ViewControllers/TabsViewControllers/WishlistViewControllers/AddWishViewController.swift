@@ -37,10 +37,11 @@ class AddWishViewController: UIViewController {
         titleTextField = {
             let textField = UITextField()
             textField.placeholder = "\"Jurassic Park\""
-            textField.autocapitalizationType = .none
+            textField.autocapitalizationType = .words
             textField.font = Utilities.textFont
             textField.textColor = Utilities.textColor
             textField.delegate = self
+            textField.returnKeyType = .done
             return textField
         }()
         
@@ -77,17 +78,18 @@ class AddWishViewController: UIViewController {
             Utilities.showAlert(error!, self)
         }
         else {
-            Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").addDocument(data: ["title":titleTextField.text!])
+            let docID = Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").document().documentID
+            Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").document(docID).setData(["title":titleTextField.text!, "id":docID])
             
             self.dismiss(animated: true)
         }
-        
     }
 }
 
 extension AddWishViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        addWishButtonTapped()
         return true
     }
 }

@@ -1,21 +1,21 @@
 //
-//  AddMovieViewController.swift
+//  EditWatchedViewController.swift
 //  Lumiere_iOS
 //
-//  Created by Andy Pang on 2022/7/16.
+//  Created by Andy Pang on 2022/8/2.
 //
 
 import Foundation
 import UIKit
 import FirebaseAuth
 
-class AddWatchedViewController: UIViewController {
+class EditWatchedViewController: UIViewController {
     
     var titleFieldLabel = UILabel()
     var titleTextField = UITextField()
     var ratingSliderLabel = UILabel()
     var ratingSlider = UISlider()
-    var likedMovie = false
+    var likedMovie = true
     var date = String()
     var dateWatchedPickerLabel = UILabel()
     var dateWatchedPicker = UIDatePicker()
@@ -24,15 +24,22 @@ class AddWatchedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.backgroundColor = Utilities.backgroundColor
         navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
-        title = "Add Watched"
+        title = "Edit Watched"
         
         // Like button
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(likedMovieButtonTapped))
+        likedMovie = Utilities.selectedWatched.hasLiked
+        if likedMovie == true {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(likedMovieButtonTapped))
+        }
+        else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(likedMovieButtonTapped))
+        }
         navigationItem.leftBarButtonItem?.tintColor = Utilities.highlightColor
         
         // Add button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addWatchedButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editWatchedButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
@@ -49,6 +56,7 @@ class AddWatchedViewController: UIViewController {
             let textField = UITextField()
             textField.placeholder = "\"Jurassic Park\""
             textField.autocapitalizationType = .words
+            textField.text = Utilities.selectedWatched.title
             textField.font = Utilities.textFont
             textField.textColor = Utilities.textColor
             textField.delegate = self
@@ -58,7 +66,7 @@ class AddWatchedViewController: UIViewController {
         
         ratingSliderLabel = {
             let label = UILabel()
-            label.text = "Rating: 0.0"
+            label.text = "Rating: \(round(Utilities.selectedWatched.rating * 10) / 10)"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
             label.textColor = Utilities.textColor
@@ -72,7 +80,7 @@ class AddWatchedViewController: UIViewController {
             slider.isContinuous = true
             slider.thumbTintColor = Utilities.textColor
             slider.tintColor = Utilities.highlightColor
-            slider.setValue(0, animated: false)
+            slider.setValue(Utilities.selectedWatched.rating, animated: false)
             slider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged)
             return slider
         }()
@@ -91,6 +99,7 @@ class AddWatchedViewController: UIViewController {
             datePicker.datePickerMode = .date
             datePicker.preferredDatePickerStyle = .wheels
             datePicker.maximumDate = Date()
+            datePicker.date = Utilities.selectedWatched.date
             datePicker.addTarget(self, action: #selector(datePickerToggled), for: .valueChanged)
             return datePicker
         }()
@@ -162,17 +171,15 @@ class AddWatchedViewController: UIViewController {
     }
     
     
-    // Create a document with the provided title, rating, date, and state of hasLiked
-    @objc func addWatchedButtonTapped() {
+    // Edit the document with the provided title, rating, date, and state of hasLiked
+    @objc func editWatchedButtonTapped() {
         let error = validateTitle()
         
         if (error != nil) {
             Utilities.showAlert(error!, self)
         }
         else {
-            let docID = Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").document().documentID
-            Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").document(docID).setData(["title":titleTextField.text!, "rating":round(ratingSlider.value * 10) / 10, "hasLiked":likedMovie, "date":dateWatchedPicker.date, "id":docID])
-            
+            Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").document(Utilities.selectedWatched.id).setData(["title":titleTextField.text!, "rating":round(ratingSlider.value * 10) / 10, "hasLiked":likedMovie, "date":dateWatchedPicker.date, "id":Utilities.selectedWatched.id])
             
             self.dismiss(animated: true)
         }
@@ -187,9 +194,10 @@ class AddWatchedViewController: UIViewController {
     }
 }
 
-extension AddWatchedViewController: UITextFieldDelegate {
+extension EditWatchedViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
 }

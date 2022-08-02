@@ -29,12 +29,12 @@ class WatchedViewController : UIViewController {
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
         // Fetch all the documents in the current user's watchedList
-        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").getDocuments() {
-            (querySnapshot, err) in
+        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").addSnapshotListener { querySnapshot, err in
             if let err = err {
                 Utilities.showAlert(err.localizedDescription, self)
             }
             else {
+                self.watchedList = []
                 for document in querySnapshot!.documents {
                     
                     // Convert FIRTimestamp to NSDate
@@ -44,7 +44,7 @@ class WatchedViewController : UIViewController {
                     }
                     
                     // Create Watched object and add to local watched list
-                    self.watchedList.append(Watched(title: document.get("title") as! String, hasLiked: document.get("hasLiked") as! Bool, date: stamp.dateValue(), rating: document.get("rating") as! Float))
+                    self.watchedList.append(Watched(title: document.get("title") as! String, hasLiked: document.get("hasLiked") as! Bool, date: stamp.dateValue(), rating: document.get("rating") as! Float, id: document.get("id") as! String))
                 }
             }
             self.watchedTableView = {
@@ -52,6 +52,9 @@ class WatchedViewController : UIViewController {
                 tableView.backgroundColor = Utilities.boxColor
                 tableView.layer.cornerRadius = 15
                 tableView.dataSource = self
+                tableView.delegate = self
+                tableView.separatorColor = Utilities.backgroundColor
+                tableView.showsVerticalScrollIndicator = false
                 tableView.register(WatchedTableViewCell.self, forCellReuseIdentifier: self.watchedReuseIdentifier)
                 return tableView
             }()
@@ -66,11 +69,11 @@ class WatchedViewController : UIViewController {
             watchedTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             watchedTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
             watchedTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15),
-            watchedTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            watchedTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
     }
     
-    ///  Present the Add Watched view controller
+    //  Present the Add Watched view controller
     @objc func addMovieButtonTapped() {
         let addWatchedViewController = AddWatchedViewController()
         addWatchedViewController.title = "Add Watched"
@@ -90,7 +93,6 @@ extension WatchedViewController: UITableViewDataSource {
             cell.configure(watchedList[indexPath.row])
             cell.selectionStyle = .none
             if watchedList[indexPath.row].hasLiked == true {
-                print("\(watchedList[indexPath.row].title): \(watchedList[indexPath.row].hasLiked)")
                 cell.backgroundColor = Utilities.highlightColor
             }
             else {
@@ -102,5 +104,18 @@ extension WatchedViewController: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
+    }
+}
+
+extension WatchedViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let watched = watchedList[indexPath.row]
+        let editWatchedViewController = EditWatchedViewController()
+        editWatchedViewController.title = "Edit Watched"
+        Utilities.selectedWatched = watched
+        let navigationViewController = UINavigationController(rootViewController: editWatchedViewController)
+         
+        present(navigationViewController, animated: true, completion: nil)
+        
     }
 }

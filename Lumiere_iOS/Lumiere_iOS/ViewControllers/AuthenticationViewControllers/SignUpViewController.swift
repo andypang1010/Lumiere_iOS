@@ -187,7 +187,7 @@ class SignUpViewController : UIViewController {
 
                 // Store user's UID in database
                 else {
-                    Utilities.database.collection("users").document(self.emailTextField.text!).setData(["uid": result!.user.uid]) { err in
+                    Utilities.database.collection("users").document(self.emailTextField.text!).setData([:]) { err in
                         if err != nil {
                             Utilities.showAlert(err!.localizedDescription, self)
                         }

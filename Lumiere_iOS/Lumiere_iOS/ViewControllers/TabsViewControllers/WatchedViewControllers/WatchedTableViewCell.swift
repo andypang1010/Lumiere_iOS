@@ -10,19 +10,19 @@ import UIKit
 class WatchedTableViewCell: UITableViewCell {
     
     var titleLabel : UILabel = {
-        var label = UILabel()
+        let label = UILabel()
         label.font = Utilities.highlightTextFont
         label.textColor = Utilities.textColor
         return label
     }()
     var ratingLabel : UILabel = {
-        var label = UILabel()
+        let label = UILabel()
         label.font = Utilities.largeFont
         label.textColor = Utilities.highlightColor
         return label
     }()
     var dateLabel : UILabel = {
-        var label = UILabel()
+        let label = UILabel()
         label.font = Utilities.commentFont
         label.textColor = Utilities.textColor
         return label
@@ -42,6 +42,7 @@ class WatchedTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             titleLabel.leftAnchor.constraint(equalTo: ratingLabel.rightAnchor, constant: 20),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
@@ -65,7 +66,7 @@ class WatchedTableViewCell: UITableViewCell {
         ratingLabel.text = String(round(watched.rating * 10) / 10)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd yyyy"
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
         dateLabel.text = dateFormatter.string(from: watched.date)
         
         if watched.hasLiked == true {

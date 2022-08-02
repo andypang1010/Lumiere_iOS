@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class WishlistViewController: UIViewController {
     
     var wishlistTableView = UITableView()
     var imdbButton = UIButton()
+    var wishlist = [Wish]()
     
     let wishlistReuseIdentifier = "wishlistCellReuse"
     let cellHeight: CGFloat = 50
@@ -28,22 +30,46 @@ class WishlistViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
-//        wishlistTableView.dataSource = self
+        // Fetch all the documents in the current user's watchedList
+        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").addSnapshotListener { querySnapshot, err in
+            if let err = err {
+                Utilities.showAlert(err.localizedDescription, self)
+            }
+            else {
+                self.wishlist = []
+                for document in querySnapshot!.documents {
+                    // Create Wish object and add to local wishlist
+                    print(document.get("title")!)
+                    self.wishlist.append(Wish(title: document.get("title") as! String, id: document.get("id") as! String))
+                }
+            }
         
-        imdbButton = {
-            let button = UIButton()
-            button.setTitle("Discover", for: .normal)
-            button.titleLabel?.font = Utilities.highlightTextFont
-            button.setTitleColor(Utilities.textColor, for: .normal)
-            button.backgroundColor = Utilities.highlightColor
-            button.layer.cornerRadius = 10
-            button.addTarget(self, action: #selector(imdbButtonTapped), for: .touchUpInside)
-            return button
-        }()
-                
-        Utilities.addViews([wishlistTableView, imdbButton], view)
-        
-        setUpConstraints()
+            self.wishlistTableView = {
+                let tableView = UITableView()
+                tableView.backgroundColor = Utilities.boxColor
+                tableView.layer.cornerRadius = 15
+                tableView.dataSource = self
+                tableView.separatorColor = Utilities.backgroundColor
+                tableView.showsVerticalScrollIndicator = false
+                tableView.register(WishlistTableViewCell.self, forCellReuseIdentifier: self.wishlistReuseIdentifier)
+                return tableView
+            }()
+            
+            self.imdbButton = {
+                let button = UIButton()
+                button.setTitle("Discover", for: .normal)
+                button.titleLabel?.font = Utilities.highlightTextFont
+                button.setTitleColor(Utilities.textColor, for: .normal)
+                button.backgroundColor = Utilities.highlightColor
+                button.layer.cornerRadius = 10
+                button.addTarget(self, action: #selector(self.imdbButtonTapped), for: .touchUpInside)
+                return button
+            }()
+                    
+            Utilities.addViews([self.wishlistTableView, self.imdbButton], self.view)
+            
+            self.setUpConstraints()
+        }
     }
     
     func setUpConstraints() {
@@ -51,7 +77,7 @@ class WishlistViewController: UIViewController {
             wishlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             wishlistTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
             wishlistTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15),
-            wishlistTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            wishlistTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
         
         NSLayoutConstraint.activate([
@@ -81,14 +107,21 @@ class WishlistViewController: UIViewController {
     }
 }
 
-//extension WishlistViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//}
+extension WishlistViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        wishlist.count
+    }
 
-//}
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = wishlistTableView.dequeueReusableCell(withIdentifier: wishlistReuseIdentifier) as? WishlistTableViewCell {
+            cell.configure(wishlist[indexPath.row])
+            cell.selectionStyle = .none
+            cell.backgroundColor = Utilities.boxColor
+
+            return cell
+        }
+        else {
+            return UITableViewCell()
+        }
+    }
+}
