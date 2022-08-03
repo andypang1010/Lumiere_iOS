@@ -118,4 +118,22 @@ extension WatchedViewController: UITableViewDelegate {
         present(navigationViewController, animated: true, completion: nil)
         
     }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive,
+                                        title: nil) { [weak self] (action, view, completionHandler) in
+            self?.deleteWatched(id: self!.watchedList[indexPath.row].id)
+                                            completionHandler(true)
+        }
+        action.image = UIImage(systemName: "xmark")
+        action.image?.withTintColor(Utilities.textColor!)
+        action.backgroundColor = .systemRed
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    func deleteWatched(id: String) {
+        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email!)!).collection("watchedList").document(id).delete()
+    }
 }

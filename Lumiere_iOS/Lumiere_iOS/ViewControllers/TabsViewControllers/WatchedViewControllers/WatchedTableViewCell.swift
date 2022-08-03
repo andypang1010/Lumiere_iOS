@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class WatchedTableViewCell: UITableViewCell {
+    
+    var id = String()
     
     var titleLabel : UILabel = {
         let label = UILabel()
@@ -75,6 +78,6 @@ class WatchedTableViewCell: UITableViewCell {
         else {
             ratingLabel.textColor = Utilities.highlightColor
         }
+        
     }
-    
 }

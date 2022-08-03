@@ -38,8 +38,8 @@ class WishlistViewController: UIViewController {
             else {
                 self.wishlist = []
                 for document in querySnapshot!.documents {
+                    
                     // Create Wish object and add to local wishlist
-                    print(document.get("title")!)
                     self.wishlist.append(Wish(title: document.get("title") as! String, id: document.get("id") as! String))
                 }
             }
@@ -49,6 +49,7 @@ class WishlistViewController: UIViewController {
                 tableView.backgroundColor = Utilities.boxColor
                 tableView.layer.cornerRadius = 15
                 tableView.dataSource = self
+                tableView.delegate = self
                 tableView.separatorColor = Utilities.backgroundColor
                 tableView.showsVerticalScrollIndicator = false
                 tableView.register(WishlistTableViewCell.self, forCellReuseIdentifier: self.wishlistReuseIdentifier)
@@ -123,5 +124,27 @@ extension WishlistViewController: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
+    }
+}
+
+extension WishlistViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .normal,
+                                        title: nil) { [weak self] (action, view, completionHandler) in
+            self?.deleteWish(id: self!.wishlist[indexPath.row].id)
+                                            completionHandler(true)
+        }
+        
+        action.image = UIImage(systemName: "xmark")
+        action.image?.withTintColor(Utilities.textColor!)
+        action.backgroundColor = .systemRed
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    func deleteWish(id: String) {
+        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email!)!).collection("wishlist").document(id).delete()
     }
 }
