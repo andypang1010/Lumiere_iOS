@@ -46,7 +46,7 @@ class LogInViewController: UIViewController {
         
         emailTextField = {
             let textField = UITextField()
-            textField.placeholder = "example@example.com"
+            textField.placeholder = "Enter your email"
             textField.autocapitalizationType = .none
             textField.font = Utilities.textFont
             textField.textColor = Utilities.textColor
@@ -67,7 +67,7 @@ class LogInViewController: UIViewController {
         
         passwordTextField = {
             let textField = UITextField()
-            textField.placeholder = "password"
+            textField.placeholder = "Enter your password"
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
             textField.font = Utilities.textFont
@@ -168,13 +168,15 @@ class LogInViewController: UIViewController {
     }
     
     @objc func logInButtonTapped() {
+        
         // Sign in with the provided email and password
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) {
             (result, error) in
-            if (error != nil) {
+            if (error != nil && error?.localizedDescription != "Missing or insufficient permissions") {
                 Utilities.showAlert(error!.localizedDescription, self)
             }
             else {
+                
                 // Push the Tab Bar view controller
                 self.navigationController?.pushViewController(TabBarViewController(), animated: true)
             }

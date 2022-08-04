@@ -43,7 +43,7 @@ class SignUpViewController : UIViewController {
         
         emailTextField = {
             let textField = UITextField()
-            textField.placeholder = "example@example.com"
+            textField.placeholder = "Enter your email"
             textField.autocapitalizationType = .none
             textField.font = Utilities.textFont
             textField.textColor = Utilities.textColor
@@ -64,7 +64,7 @@ class SignUpViewController : UIViewController {
         
         passwordTextField = {
             let textField = UITextField()
-            textField.placeholder = "password"
+            textField.placeholder = "Enter your password"
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
             textField.font = Utilities.textFont
@@ -85,7 +85,7 @@ class SignUpViewController : UIViewController {
         
         confirmPasswordTextField = {
             let textField = UITextField()
-            textField.placeholder = "confirm password"
+            textField.placeholder = "Enter your password again"
             textField.autocapitalizationType = .none
             textField.isSecureTextEntry = true
             textField.font = Utilities.textFont

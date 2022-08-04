@@ -54,8 +54,8 @@ class EditWatchedViewController: UIViewController {
         
         titleTextField = {
             let textField = UITextField()
-            textField.placeholder = "\"Jurassic Park\""
-            textField.autocapitalizationType = .words
+            textField.placeholder = "Enter the film title"
+            textField.autocapitalizationType = .none
             textField.text = Utilities.selectedWatched.title
             textField.font = Utilities.textFont
             textField.textColor = Utilities.textColor

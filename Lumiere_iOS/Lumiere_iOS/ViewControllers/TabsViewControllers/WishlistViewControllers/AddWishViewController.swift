@@ -36,8 +36,8 @@ class AddWishViewController: UIViewController {
         
         titleTextField = {
             let textField = UITextField()
-            textField.placeholder = "\"Jurassic Park\""
-            textField.autocapitalizationType = .words
+            textField.placeholder = "Enter the film title"
+            textField.autocapitalizationType = .none
             textField.font = Utilities.textFont
             textField.textColor = Utilities.textColor
             textField.delegate = self
@@ -78,7 +78,11 @@ class AddWishViewController: UIViewController {
             Utilities.showAlert(error!, self)
         }
         else {
+            
+            // Get the id of the new document
             let docID = Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").document().documentID
+            
+            // Set the fields of the new document, with one of its field being its id
             Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").document(docID).setData(["title":titleTextField.text!, "id":docID])
             
             self.dismiss(animated: true)

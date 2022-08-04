@@ -59,7 +59,7 @@ class ProfileViewController : UIViewController {
     
     func setUpConstraints() {
         NSLayoutConstraint.activate([
-            emailLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
+            emailLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         

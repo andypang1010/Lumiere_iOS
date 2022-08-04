@@ -24,6 +24,7 @@ class WatchedViewController : UIViewController {
         navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
         title = "Watched"
         
+        // Add button that presents the Add Watched view controller when tapped
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMovieButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
@@ -112,6 +113,8 @@ extension WatchedViewController: UITableViewDelegate {
         let watched = watchedList[indexPath.row]
         let editWatchedViewController = EditWatchedViewController()
         editWatchedViewController.title = "Edit Watched"
+        
+        // Store the data of Watched object in Utilities to be accessed by the Edit Watched view controller
         Utilities.selectedWatched = watched
         let navigationViewController = UINavigationController(rootViewController: editWatchedViewController)
          

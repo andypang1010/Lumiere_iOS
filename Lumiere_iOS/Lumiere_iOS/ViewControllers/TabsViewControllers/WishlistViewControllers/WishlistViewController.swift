@@ -26,6 +26,7 @@ class WishlistViewController: UIViewController {
         navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
         title = "Wishlist"
         
+        // Add button that presents the Add Wish view controller when tapped
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWishButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
@@ -131,7 +132,7 @@ extension WishlistViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let action = UIContextualAction(style: .normal,
+        let action = UIContextualAction(style: .destructive,
                                         title: nil) { [weak self] (action, view, completionHandler) in
             self?.deleteWish(id: self!.wishlist[indexPath.row].id)
                                             completionHandler(true)

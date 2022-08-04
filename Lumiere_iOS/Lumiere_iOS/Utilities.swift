@@ -27,7 +27,7 @@ class Utilities {
     static let highlightCommentFont = UIFont(name: "Avenir Black", size: 14)!
     static let tabBarFont = UIFont(name: "Avenir Next", size: 12)!
     
-    static var selectedWatched = Watched(title: "", hasLiked: false, date: Date(), rating: 0, id: "")
+    static var selectedWatched = Watched(title: "", hasLiked: false, date: Date(), rating: 0, id: "") 
     
     /// Checks if the password complies with the specified Regex
     /// - Parameter userPassword: The password that the user passed to the text field
