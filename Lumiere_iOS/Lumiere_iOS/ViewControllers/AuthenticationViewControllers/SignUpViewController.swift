@@ -171,18 +171,18 @@ class SignUpViewController : UIViewController {
     @objc func signUpButtonTapped() {
         
         // Validate fields
-        let error = validateFields()
+        let err = validateFields()
         
-        if (error != nil) {
-            Utilities.showAlert(error!, self)
+        if (err != nil) {
+            Utilities.showAlert(err!, self)
         }
         else {
             // Create user
-            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, err) in
 
-                // Check for errors
-                if (error != nil) {
-                    Utilities.showAlert(error!.localizedDescription, self)
+                // Check for errs
+                if (err != nil) {
+                    Utilities.showAlert(err!.localizedDescription, self)
                 }
 
                 // Store user's UID in database
@@ -201,26 +201,26 @@ class SignUpViewController : UIViewController {
     
     
     /// Read all the fields in the view controller and check if they are filled in and follow the required rules
-    /// - Returns: Returns nil if the fields are filled and comply to the rules, returns an error message if the fields are unfilled
+    /// - Returns: Returns nil if the fields are filled and comply to the rules, returns an err message if the fields are unfilled
     func validateFields() -> String? {
-        var errorMessage = ""
+        var errMessage = ""
         [emailTextField, passwordTextField, confirmPasswordTextField].forEach{textField in
             if (textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
-            errorMessage = "Please fill in all the fields"
+            errMessage = "Please fill in all the fields"
         }}
         
         let cleanedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if (Utilities.isPasswordValid(cleanedPassword ?? "") == false) {
-            errorMessage = "Password must contain at least one big letter, one small letter, one number, and is minimum eight characters long"
+            errMessage = "Password must contain at least one big letter, one small letter, one number, and is minimum eight characters long"
         }
         
         else if (confirmPasswordTextField.text != passwordTextField.text) {
-            errorMessage = "Password and confirm password does not match"
+            errMessage = "Password and confirm password does not match"
         }
         
-        if (errorMessage != "") {
-            return errorMessage
+        if (errMessage != "") {
+            return errMessage
         }
         
         return nil

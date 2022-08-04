@@ -80,8 +80,9 @@ class ProfileViewController : UIViewController {
         do {
             try Auth.auth().signOut()
         }
-        catch let signOutError {
-            Utilities.showAlert(signOutError.localizedDescription, self)
+        catch let err {
+            Utilities.showAlert(err.localizedDescription, self)
+            
         }
         self.navigationController?.pushViewController(LogInViewController(), animated: true)
     }

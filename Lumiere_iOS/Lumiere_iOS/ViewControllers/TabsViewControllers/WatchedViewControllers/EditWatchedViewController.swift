@@ -173,10 +173,10 @@ class EditWatchedViewController: UIViewController {
     
     // Edit the document with the provided title, rating, date, and state of hasLiked
     @objc func editWatchedButtonTapped() {
-        let error = validateTitle()
+        let err = validateTitle()
         
-        if (error != nil) {
-            Utilities.showAlert(error!, self)
+        if (err != nil) {
+            Utilities.showAlert(err!, self)
         }
         else {
             Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").document(Utilities.selectedWatched.id).setData(["title":titleTextField.text!, "rating":round(ratingSlider.value * 10) / 10, "hasLiked":likedMovie, "date":dateWatchedPicker.date, "id":Utilities.selectedWatched.id])

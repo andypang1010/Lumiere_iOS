@@ -171,9 +171,10 @@ class LogInViewController: UIViewController {
         
         // Sign in with the provided email and password
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) {
-            (result, error) in
-            if (error != nil && error?.localizedDescription != "Missing or insufficient permissions") {
-                Utilities.showAlert(error!.localizedDescription, self)
+            (result, err) in
+            if err != nil {
+                Utilities.showAlert(err!.localizedDescription, self)
+                print(err!.localizedDescription)
             }
             else {
                 

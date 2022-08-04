@@ -72,10 +72,10 @@ class AddWishViewController: UIViewController {
     }
     
     @objc func addWishButtonTapped() {
-        let error = validateTitle()
+        let err = validateTitle()
         
-        if (error != nil) {
-            Utilities.showAlert(error!, self)
+        if (err != nil) {
+            Utilities.showAlert(err!, self)
         }
         else {
             

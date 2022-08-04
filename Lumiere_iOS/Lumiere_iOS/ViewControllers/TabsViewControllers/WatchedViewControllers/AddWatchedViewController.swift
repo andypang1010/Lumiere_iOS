@@ -164,10 +164,10 @@ class AddWatchedViewController: UIViewController {
     
     // Create a document with the provided title, rating, date, and state of hasLiked
     @objc func addWatchedButtonTapped() {
-        let error = validateTitle()
+        let err = validateTitle()
         
-        if (error != nil) {
-            Utilities.showAlert(error!, self)
+        if (err != nil) {
+            Utilities.showAlert(err!, self)
         }
         else {
             

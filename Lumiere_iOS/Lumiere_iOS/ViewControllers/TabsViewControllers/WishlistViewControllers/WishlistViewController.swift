@@ -34,7 +34,9 @@ class WishlistViewController: UIViewController {
         // Fetch all the documents in the current user's watchedList
         Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").addSnapshotListener { querySnapshot, err in
             if let err = err {
-                Utilities.showAlert(err.localizedDescription, self)
+                if err.localizedDescription != "Missing or insufficient permissions." {
+                    Utilities.showAlert(err.localizedDescription, self)
+                }
             }
             else {
                 self.wishlist = []
