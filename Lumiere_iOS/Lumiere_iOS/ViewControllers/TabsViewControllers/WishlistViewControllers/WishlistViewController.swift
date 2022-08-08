@@ -23,7 +23,8 @@ class WishlistViewController: UIViewController {
         view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.backgroundColor = Utilities.backgroundColor
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Utilities.highlightTextFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Wishlist"
         
         // Add button that presents the Add Wish view controller when tapped
@@ -141,7 +142,7 @@ extension WishlistViewController: UITableViewDelegate {
         }
         
         action.image = UIImage(systemName: "xmark")
-        action.image?.withTintColor(Utilities.textColor!)
+        action.image?.withTintColor(Utilities.textColor)
         action.backgroundColor = .systemRed
         
         return UISwipeActionsConfiguration(actions: [action])

@@ -21,7 +21,8 @@ class WatchedViewController : UIViewController {
         view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.backgroundColor = Utilities.backgroundColor
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Utilities.highlightTextFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Watched"
         
         // Add button that presents the Add Watched view controller when tapped
@@ -50,6 +51,7 @@ class WatchedViewController : UIViewController {
                     self.watchedList.append(Watched(title: document.get("title") as! String, hasLiked: document.get("hasLiked") as! Bool, date: stamp.dateValue(), rating: document.get("rating") as! Float, id: document.get("id") as! String))
                 }
             }
+            
             self.watchedTableView = {
                 let tableView = UITableView()
                 tableView.backgroundColor = Utilities.boxColor
@@ -68,6 +70,7 @@ class WatchedViewController : UIViewController {
     }
     
     func setUpConstraints() {
+        
         NSLayoutConstraint.activate([
             watchedTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             watchedTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
@@ -101,12 +104,13 @@ extension WatchedViewController: UITableViewDataSource {
             else {
                 cell.backgroundColor = Utilities.boxColor
             }
-
             return cell
+
         }
         else {
             return UITableViewCell()
         }
+
     }
 }
 
@@ -132,7 +136,7 @@ extension WatchedViewController: UITableViewDelegate {
                                             completionHandler(true)
         }
         action.image = UIImage(systemName: "xmark")
-        action.image?.withTintColor(Utilities.textColor!)
+        action.image?.withTintColor(Utilities.textColor)
         action.backgroundColor = .systemRed
         
         return UISwipeActionsConfiguration(actions: [action])

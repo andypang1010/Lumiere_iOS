@@ -8,13 +8,14 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 class Utilities {
     
-    static let database = Firestore.firestore()
-    static let usersCollectionReference = database.collection("users")
+    static let storage = Storage.storage()
+    static let usersCollectionReference = Firestore.firestore().collection("users")
     
-    static let textColor = UIColor(named: "Text Color")
+    static let textColor = UIColor.white
     static let highlightColor = UIColor(named: "Highlight Color")
     static let boxColor = UIColor(named: "Box Color")
     static let backgroundColor = UIColor(named: "Background Color")
@@ -23,8 +24,8 @@ class Utilities {
     static let largeFont = UIFont(name: "Avenir Black", size: 25)!
     static let textFont = UIFont(name: "Avenir Next", size: 20)!
     static let highlightTextFont = UIFont(name: "Avenir Black", size: 20)!
-    static let commentFont = UIFont(name: "Avenir Next", size: 14)!
-    static let highlightCommentFont = UIFont(name: "Avenir Black", size: 14)!
+    static let commentFont = UIFont(name: "Avenir Next", size: 12)!
+    static let highlightCommentFont = UIFont(name: "Avenir Black", size: 12)!
     static let tabBarFont = UIFont(name: "Avenir Next", size: 12)!
     
     static var selectedWatched = Watched(title: "", hasLiked: false, date: Date(), rating: 0, id: "") 

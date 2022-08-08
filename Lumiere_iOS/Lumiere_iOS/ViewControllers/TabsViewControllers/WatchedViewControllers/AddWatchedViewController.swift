@@ -11,6 +11,7 @@ import FirebaseAuth
 
 class AddWatchedViewController: UIViewController {
     
+    var scrollView = UIScrollView()
     var titleFieldLabel = UILabel()
     var titleTextField = UITextField()
     var ratingSliderLabel = UILabel()
@@ -24,7 +25,8 @@ class AddWatchedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Utilities.highlightTextFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Add Watched"
         
         // Like button
@@ -35,6 +37,16 @@ class AddWatchedViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addWatchedButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
+        
+        scrollView = {
+            let scrollView = UIScrollView()
+            scrollView.isScrollEnabled = true
+            scrollView.showsHorizontalScrollIndicator = false
+            scrollView.isDirectionalLockEnabled = true
+            scrollView.scrollsToTop = true
+            scrollView.bounces = true
+            return scrollView
+        }()
         
         titleFieldLabel = {
             let label = UILabel()
@@ -89,49 +101,63 @@ class AddWatchedViewController: UIViewController {
         dateWatchedPicker = {
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = .date
-            datePicker.preferredDatePickerStyle = .wheels
+            datePicker.preferredDatePickerStyle = .inline
+            datePicker.tintColor = Utilities.highlightColor
             datePicker.maximumDate = Date()
             datePicker.addTarget(self, action: #selector(datePickerToggled), for: .valueChanged)
             return datePicker
         }()
         
-        Utilities.addViews([titleFieldLabel, titleTextField, ratingSliderLabel, ratingSlider, dateWatchedPickerLabel, dateWatchedPicker], view)
+        Utilities.addViews([titleFieldLabel, titleTextField, ratingSliderLabel, ratingSlider, dateWatchedPickerLabel, dateWatchedPicker], scrollView)
+        Utilities.addViews([scrollView], view)
         
         setUpConstraints()
     }
     
     func setUpConstraints() {
+        
         NSLayoutConstraint.activate([
-            titleFieldLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            titleFieldLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            titleFieldLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50),
+            titleFieldLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            titleFieldLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             titleTextField.topAnchor.constraint(equalTo: titleFieldLabel.bottomAnchor, constant: 5),
-            titleTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            titleTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
+            titleTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            titleTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             ratingSliderLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 50),
-            ratingSliderLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30)
+            ratingSliderLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            ratingSliderLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             ratingSlider.topAnchor.constraint(equalTo: ratingSliderLabel.bottomAnchor, constant: 10),
-            ratingSlider.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            ratingSlider.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
+            ratingSlider.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            ratingSlider.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             dateWatchedPickerLabel.topAnchor.constraint(equalTo: ratingSlider.bottomAnchor, constant: 50),
-            dateWatchedPickerLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30)
+            dateWatchedPickerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            dateWatchedPickerLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             dateWatchedPicker.topAnchor.constraint(equalTo: dateWatchedPickerLabel.bottomAnchor, constant: 10),
-            dateWatchedPicker.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            dateWatchedPicker.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
+            dateWatchedPicker.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            dateWatchedPicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
+            dateWatchedPicker.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10)
         ])
     }
     

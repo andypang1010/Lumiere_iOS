@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class SignUpViewController : UIViewController {
 
+    var scrollView = UIScrollView()
     var emailFieldLabel = UILabel()
     var emailTextField = UITextField()
     var passwordFieldLabel = UILabel()
@@ -25,12 +26,23 @@ class SignUpViewController : UIViewController {
         view.backgroundColor = Utilities.backgroundColor
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.backgroundColor = Utilities.backgroundColor
-        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor!]
+        navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Utilities.highlightTextFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Sign Up"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(signUpButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
+        
+        scrollView = {
+            let scrollView = UIScrollView()
+            scrollView.isScrollEnabled = true
+            scrollView.showsHorizontalScrollIndicator = false
+            scrollView.isDirectionalLockEnabled = true
+            scrollView.scrollsToTop = true
+            scrollView.bounces = true
+            return scrollView
+        }()
         
         emailFieldLabel = {
             let label = UILabel()
@@ -113,7 +125,8 @@ class SignUpViewController : UIViewController {
             return label
         }()
 
-        Utilities.addViews([emailFieldLabel, emailTextField, passwordFieldLabel, passwordTextField, confirmPasswordFieldLabel, confirmPasswordTextField, passwordConstraintsLabel, passwordConstraintsTextView], view)
+        Utilities.addViews([emailFieldLabel, emailTextField, passwordFieldLabel, passwordTextField, confirmPasswordFieldLabel, confirmPasswordTextField, passwordConstraintsLabel, passwordConstraintsTextView], scrollView)
+        Utilities.addViews([scrollView], view)
         
         setUpConstraints()
         
@@ -122,47 +135,59 @@ class SignUpViewController : UIViewController {
     func setUpConstraints() {
         
         NSLayoutConstraint.activate([
-            emailFieldLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            emailFieldLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            emailFieldLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50),
+            emailFieldLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            emailFieldLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             emailTextField.topAnchor.constraint(equalTo: emailFieldLabel.bottomAnchor, constant: 10),
-            emailTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            emailTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
+            emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            emailTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             passwordFieldLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 50),
-            passwordFieldLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30)
+            passwordFieldLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            passwordFieldLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             passwordTextField.topAnchor.constraint(equalTo: passwordFieldLabel.bottomAnchor, constant: 10),
-            passwordTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            passwordTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
+            passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             confirmPasswordFieldLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50),
-            confirmPasswordFieldLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30)
+            confirmPasswordFieldLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            confirmPasswordFieldLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             confirmPasswordTextField.topAnchor.constraint(equalTo: confirmPasswordFieldLabel.bottomAnchor, constant: 10),
-            confirmPasswordTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            confirmPasswordTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
+            confirmPasswordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            confirmPasswordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             passwordConstraintsLabel.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 40),
-            passwordConstraintsLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
+            passwordConstraintsLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            passwordConstraintsLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             passwordConstraintsTextView.topAnchor.constraint(equalTo: passwordConstraintsLabel.bottomAnchor, constant: 10),
-            passwordConstraintsTextView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            passwordConstraintsTextView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30)
+            passwordConstraintsTextView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            passwordConstraintsTextView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
+            passwordConstraintsTextView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -30)
         ])
         
 
@@ -187,7 +212,7 @@ class SignUpViewController : UIViewController {
 
                 // Store user's UID in database
                 else {
-                    Utilities.database.collection("users").document(self.emailTextField.text!).setData([:]) { err in
+                    Utilities.usersCollectionReference.document(self.emailTextField.text!).setData([:]) { err in
                         if err != nil {
                             Utilities.showAlert(err!.localizedDescription, self)
                         }
