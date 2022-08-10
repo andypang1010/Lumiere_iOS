@@ -202,6 +202,7 @@ class SignUpViewController : UIViewController {
             Utilities.showAlert(err!, self)
         }
         else {
+            
             // Create user
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (result, err) in
 
@@ -224,22 +225,22 @@ class SignUpViewController : UIViewController {
         }
     }
     
-    
-    /// Read all the fields in the view controller and check if they are filled in and follow the required rules
-    /// - Returns: Returns nil if the fields are filled and comply to the rules, returns an err message if the fields are unfilled
     func validateFields() -> String? {
         var errMessage = ""
+        
+        // Check if every field is filled in
         [emailTextField, passwordTextField, confirmPasswordTextField].forEach{textField in
             if (textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
             errMessage = "Please fill in all the fields"
         }}
         
+        // Check if the password is not just space
         let cleanedPassword = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-        
         if (Utilities.isPasswordValid(cleanedPassword ?? "") == false) {
             errMessage = "Password must contain at least one big letter, one small letter, one number, and is minimum eight characters long"
         }
         
+        // Check if password and confirm password are the same
         else if (confirmPasswordTextField.text != passwordTextField.text) {
             errMessage = "Password and confirm password does not match"
         }

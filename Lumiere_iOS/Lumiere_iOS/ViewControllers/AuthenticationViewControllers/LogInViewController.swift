@@ -33,6 +33,7 @@ class LogInViewController: UIViewController {
         self.navigationController?.navigationItem.backBarButtonItem?.isEnabled = false;
         self.navigationController!.interactivePopGestureRecognizer!.isEnabled = false;
         
+        // Hides the tab bar
         self.tabBarController?.tabBar.isHidden = true
         
         emailFieldLabel = {

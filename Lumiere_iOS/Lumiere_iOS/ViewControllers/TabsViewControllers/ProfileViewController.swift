@@ -24,6 +24,7 @@ class ProfileViewController : UIViewController {
         navigationController!.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: Utilities.titleFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Profile"
         
+        // Exit button on the right navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain, target: self, action: #selector(logOutButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
@@ -45,18 +46,22 @@ class ProfileViewController : UIViewController {
                     imageView.clipsToBounds = true
                     return imageView
                 }()
+                
+                // Listen to changes in the profilePhoto field of the user document
                 let profilePhotoURL = querySnapshot?.get("profilePhoto")
+                
+                // Set a default photo
                 if profilePhotoURL == nil {
                     self.photoImageView.image = UIImage(systemName: "person.fill")
                 }
                 
+                // Convert the URL in profilePhoto to data and present in the photoImageView
                 else {
                     if let data = try? Data(contentsOf: URL(string: profilePhotoURL as! String)!) {
                         self.photoImageView.image = UIImage(data: data)
                     }
                 }
 
-                
                 self.photoUploadButton = {
                     let button = UIButton()
                     button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
@@ -145,20 +150,24 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             
+            // Compress image to have a quality of 0.3
             guard let imageData = image.jpegData(compressionQuality: 0.3) else {
                 Utilities.showAlert("Couldn't compress image", self)
                 return
             }
             
+            // Create an arbitrary string as the ID for the image
             let imageID = UUID().uuidString
             let imageReference = Utilities.storage.reference().child(imageID)
             
+            // Store data
             imageReference.putData(imageData, metadata: nil) { (metadata, err) in
                 if let err = err {
                     Utilities.showAlert(err.localizedDescription, self)
                     return
                 }
                 
+                // Fetch the download URL of the image
                 imageReference.downloadURL { url, err in
                     if let err = err {
                         Utilities.showAlert(err.localizedDescription, self)
@@ -170,8 +179,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
                         return
                     }
                     
+                    // Save download URL to the user document
                     Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).setData(["profilePhoto" : url.absoluteString])
-                    
                 }
             }
         }

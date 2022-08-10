@@ -29,11 +29,11 @@ class AddWatchedViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Utilities.highlightTextFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Add Watched"
         
-        // Like button
+        // Like button on the left navigation bar
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(likedMovieButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = Utilities.highlightColor
         
-        // Add button
+        // Add button on the right navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addWatchedButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
@@ -179,8 +179,7 @@ class AddWatchedViewController: UIViewController {
     }
     
     
-    /// Format the date by MMMM DD YYYY
-    /// - Parameter datePicker: A UIDatePicker object
+    // Format the date by MMMM DD, YYYY
     @objc func datePickerToggled(_ datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM dd, yyyy"

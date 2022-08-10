@@ -27,6 +27,7 @@ class WishlistTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Configure the values of the elements inside the cell to show the Wish object
     func configure(_ wish : Wish) {
         titleLabel.text = wish.title
     }

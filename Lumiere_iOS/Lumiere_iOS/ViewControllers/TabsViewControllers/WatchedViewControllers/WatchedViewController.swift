@@ -25,7 +25,7 @@ class WatchedViewController : UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Utilities.highlightTextFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Watched"
         
-        // Add button that presents the Add Watched view controller when tapped
+        // Add button on the right navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMovieButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
@@ -128,6 +128,7 @@ extension WatchedViewController: UITableViewDelegate {
         
     }
     
+    // Trailing delete swipe action on cells
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive,

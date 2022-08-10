@@ -27,7 +27,7 @@ class WishlistViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Utilities.highlightTextFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Wishlist"
         
-        // Add button that presents the Add Wish view controller when tapped
+        // Add button on the right navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWishButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
@@ -132,6 +132,8 @@ extension WishlistViewController: UITableViewDataSource {
 }
 
 extension WishlistViewController: UITableViewDelegate {
+    
+    // Trailing delete swipe action on cells
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         

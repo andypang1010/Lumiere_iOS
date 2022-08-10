@@ -30,7 +30,7 @@ class EditWatchedViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Utilities.highlightTextFont, NSAttributedString.Key.foregroundColor: Utilities.textColor]
         title = "Edit Watched"
         
-        // Like button
+        // Like button on the left navigation bar
         likedMovie = Utilities.selectedWatched.hasLiked
         if likedMovie == true {
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(likedMovieButtonTapped))
@@ -40,7 +40,7 @@ class EditWatchedViewController: UIViewController {
         }
         navigationItem.leftBarButtonItem?.tintColor = Utilities.highlightColor
         
-        // Add button
+        // Add button on the right navigation bar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editWatchedButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
@@ -176,7 +176,7 @@ class EditWatchedViewController: UIViewController {
         ratingSliderLabel.text = "Rating: \(sliderValue)"
     }
     
-    // Negate the current likedMovie state
+    // Change the current likedMovie state
     @objc func likedMovieButtonTapped() {
         likedMovie = !likedMovie
         if (likedMovie == true) {
@@ -188,8 +188,7 @@ class EditWatchedViewController: UIViewController {
     }
     
     
-    /// Format the date by MMMM DD YYYY
-    /// - Parameter datePicker: A UIDatePicker object
+    // Format the date by MMMM DD, YYYY
     @objc func datePickerToggled(_ datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM dd, yyyy"
