@@ -163,11 +163,16 @@ class ProfileViewController : UIViewController {
     // Delete the current account with all its information and go back to Log In view controller
     @objc func deleteAccountButtonTapped() {
         
-        //TODO: Delete the current user's entry in Users and all its subcollections
-        //TODO: Remove the current user's authentication information from FirebaseAuth
+        let user = Auth.auth().currentUser!
+        Utilities.usersCollectionReference.document((user.email!)).delete()
         
-        self.navigationController?.pushViewController(LogInViewController(), animated: true)
-
+        user.delete { error in
+          if let error = error {
+              Utilities.showAlert(error.localizedDescription, self)
+          } else {
+              self.navigationController?.pushViewController(LogInViewController(), animated: true)
+          }
+        }
     }
 }
 
