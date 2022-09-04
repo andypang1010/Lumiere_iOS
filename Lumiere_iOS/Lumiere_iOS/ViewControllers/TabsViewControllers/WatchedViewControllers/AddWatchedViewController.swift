@@ -61,6 +61,7 @@ class AddWatchedViewController: UIViewController {
             let textField = UITextField()
             textField.placeholder = "Enter the film title"
             textField.autocapitalizationType = .none
+            textField.text = Utilities.selected.title
             textField.font = Utilities.textFont
             textField.textColor = Utilities.textColor
             textField.delegate = self
@@ -202,6 +203,7 @@ class AddWatchedViewController: UIViewController {
             // Set the fields of the new document, with one of its field being its id
             Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").document(docID).setData(["title":titleTextField.text!, "rating":round(ratingSlider.value * 10) / 10, "hasLiked":likedMovie, "date":dateWatchedPicker.date, "id":docID])
             
+            Utilities.selected = Watched()
             
             self.dismiss(animated: true)
         }

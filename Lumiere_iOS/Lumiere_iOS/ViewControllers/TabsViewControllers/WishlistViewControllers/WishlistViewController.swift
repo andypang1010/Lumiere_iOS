@@ -133,6 +133,29 @@ extension WishlistViewController: UITableViewDataSource {
 
 extension WishlistViewController: UITableViewDelegate {
     
+    //Leading watch swipe action on cells
+    func tableView(_ tableView: UITableView,
+                   leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .normal,
+                                        title: nil) { [weak self] (action, view, completionHandler) in
+            Utilities.selected = Watched(title: (self?.wishlist[indexPath.row].title)!, hasLiked: false, date: Date(), rating: 0, id: "")
+            let addWatchedViewController = AddWatchedViewController()
+            addWatchedViewController.title = "Add Watched"
+            
+            let navigationViewController = UINavigationController(rootViewController: addWatchedViewController)
+            self!.present(navigationViewController, animated: true, completion: nil)
+            
+            completionHandler(true)
+        }
+        
+        action.image = UIImage(systemName: "plus")
+        action.image?.withTintColor(Utilities.textColor)
+        action.backgroundColor = Utilities.highlightColor
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
     // Trailing delete swipe action on cells
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

@@ -53,7 +53,7 @@ class AddWishViewController: UIViewController {
     
     func setUpConstraints() {
         NSLayoutConstraint.activate([
-            titleFieldLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleFieldLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             titleFieldLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30)
         ])
         

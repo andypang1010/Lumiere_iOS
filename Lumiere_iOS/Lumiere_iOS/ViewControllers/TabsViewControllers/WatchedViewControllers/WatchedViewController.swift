@@ -121,7 +121,7 @@ extension WatchedViewController: UITableViewDelegate {
         editWatchedViewController.title = "Edit Watched"
         
         // Store the data of Watched object in Utilities to be accessed by the Edit Watched view controller
-        Utilities.selectedWatched = watched
+        Utilities.selected = watched
         let navigationViewController = UINavigationController(rootViewController: editWatchedViewController)
          
         present(navigationViewController, animated: true, completion: nil)

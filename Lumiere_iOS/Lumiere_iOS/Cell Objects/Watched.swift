@@ -14,6 +14,22 @@ class Watched {
     var rating: Float
     var id: String
     
+    init() {
+        title = ""
+        hasLiked = false
+        date = Date()
+        rating = 0
+        id = ""
+    }
+    
+    init(title: String) {
+        self.title = title
+        hasLiked = false
+        date = Date()
+        rating = 0
+        id = ""
+    }
+    
     init(title: String, hasLiked: Bool, date: Date, rating: Float, id: String) {
         self.title = title
         self.hasLiked = hasLiked

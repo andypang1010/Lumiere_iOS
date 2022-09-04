@@ -31,7 +31,7 @@ class EditWatchedViewController: UIViewController {
         title = "Edit Watched"
         
         // Like button on the left navigation bar
-        likedMovie = Utilities.selectedWatched.hasLiked
+        likedMovie = Utilities.selected.hasLiked
         if likedMovie == true {
             navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(likedMovieButtonTapped))
         }
@@ -68,7 +68,7 @@ class EditWatchedViewController: UIViewController {
             let textField = UITextField()
             textField.placeholder = "Enter the film title"
             textField.autocapitalizationType = .none
-            textField.text = Utilities.selectedWatched.title
+            textField.text = Utilities.selected.title
             textField.font = Utilities.textFont
             textField.textColor = Utilities.textColor
             textField.delegate = self
@@ -78,7 +78,7 @@ class EditWatchedViewController: UIViewController {
         
         ratingSliderLabel = {
             let label = UILabel()
-            label.text = "Rating: \(round(Utilities.selectedWatched.rating * 10) / 10)"
+            label.text = "Rating: \(round(Utilities.selected.rating * 10) / 10)"
             label.numberOfLines = 1
             label.font = Utilities.highlightTextFont
             label.textColor = Utilities.textColor
@@ -92,7 +92,7 @@ class EditWatchedViewController: UIViewController {
             slider.isContinuous = true
             slider.thumbTintColor = Utilities.textColor
             slider.tintColor = Utilities.highlightColor
-            slider.setValue(Utilities.selectedWatched.rating, animated: false)
+            slider.setValue(Utilities.selected.rating, animated: false)
             slider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged)
             return slider
         }()
@@ -112,7 +112,7 @@ class EditWatchedViewController: UIViewController {
             datePicker.preferredDatePickerStyle = .inline
             datePicker.tintColor = Utilities.highlightColor
             datePicker.maximumDate = Date()
-            datePicker.date = Utilities.selectedWatched.date
+            datePicker.date = Utilities.selected.date
             datePicker.addTarget(self, action: #selector(datePickerToggled), for: .valueChanged)
             return datePicker
         }()
@@ -204,7 +204,7 @@ class EditWatchedViewController: UIViewController {
             Utilities.showAlert(err!, self)
         }
         else {
-            Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").document(Utilities.selectedWatched.id).setData(["title":titleTextField.text!, "rating":round(ratingSlider.value * 10) / 10, "hasLiked":likedMovie, "date":dateWatchedPicker.date, "id":Utilities.selectedWatched.id])
+            Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").document(Utilities.selected.id).setData(["title":titleTextField.text!, "rating":round(ratingSlider.value * 10) / 10, "hasLiked":likedMovie, "date":dateWatchedPicker.date, "id":Utilities.selected.id])
             
             self.dismiss(animated: true)
         }

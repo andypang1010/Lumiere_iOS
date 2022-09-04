@@ -15,6 +15,7 @@ class ProfileViewController : UIViewController {
     var photoUploadButton = UIButton()
     var emailLabel = UILabel()
     var uidLabel = UILabel()
+    var deleteAccountButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +91,16 @@ class ProfileViewController : UIViewController {
                     return label
                 }()
                 
-                Utilities.addViews([self.photoImageView, self.photoUploadButton, self.emailLabel, self.uidLabel], self.view)
+                self.deleteAccountButton = {
+                    let button = UIButton()
+                    button.setTitle("Delete Account", for: .normal)
+                    button.titleLabel?.font = Utilities.commentFont
+                    button.setTitleColor(Utilities.optionalColor, for: .normal)
+                    button.addTarget(self, action: #selector(self.deleteAccountButtonTapped), for: .touchUpInside)
+                    return button
+                }()
+                
+                Utilities.addViews([self.photoImageView, self.photoUploadButton, self.emailLabel, self.uidLabel, self.deleteAccountButton], self.view)
                 
                 self.setUpConstraints()
             }
@@ -122,6 +132,11 @@ class ProfileViewController : UIViewController {
             uidLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5),
             uidLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            deleteAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            deleteAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     
     // Sign out of the current user and return to the Log In view controller
@@ -136,12 +151,23 @@ class ProfileViewController : UIViewController {
         self.navigationController?.pushViewController(LogInViewController(), animated: true)
     }
     
+    // Access user's photo library and allow user to pick an image
     @objc func uploadButtonTapped() {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true)
+    }
+    
+    // Delete the current account with all its information and go back to Log In view controller
+    @objc func deleteAccountButtonTapped() {
+        
+        //TODO: Delete the current user's entry in Users and all its subcollections
+        //TODO: Remove the current user's authentication information from FirebaseAuth
+        
+        self.navigationController?.pushViewController(LogInViewController(), animated: true)
+
     }
 }
 

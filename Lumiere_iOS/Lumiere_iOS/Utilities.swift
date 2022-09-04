@@ -19,6 +19,7 @@ class Utilities {
     static let highlightColor = UIColor(named: "Highlight Color")
     static let boxColor = UIColor(named: "Box Color")
     static let backgroundColor = UIColor(named: "Background Color")
+    static let optionalColor = UIColor.gray
     
     static let titleFont = UIFont(name: "Avenir Black", size: 40)!
     static let largeFont = UIFont(name: "Avenir Black", size: 25)!
@@ -28,7 +29,7 @@ class Utilities {
     static let highlightCommentFont = UIFont(name: "Avenir Black", size: 12)!
     static let tabBarFont = UIFont(name: "Avenir Next", size: 12)!
     
-    static var selectedWatched = Watched(title: "", hasLiked: false, date: Date(), rating: 0, id: "") 
+    static var selected = Watched()
     
     /// Checks if the password complies with the specified Regex
     /// - Parameter userPassword: The password that the user passed to the text field
