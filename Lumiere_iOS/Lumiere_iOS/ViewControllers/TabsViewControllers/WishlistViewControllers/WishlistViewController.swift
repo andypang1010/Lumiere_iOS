@@ -139,7 +139,7 @@ extension WishlistViewController: UITableViewDelegate {
         
         let action = UIContextualAction(style: .normal,
                                         title: nil) { [weak self] (action, view, completionHandler) in
-            Utilities.selected = Watched(title: (self?.wishlist[indexPath.row].title)!, hasLiked: false, date: Date(), rating: 0, id: "")
+            Utilities.selected = Watched(title: (self?.wishlist[indexPath.row].title)!)
             let addWatchedViewController = AddWatchedViewController()
             addWatchedViewController.title = "Add Watched"
             
