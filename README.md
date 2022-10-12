@@ -1,4 +1,4 @@
-# Lumiere_iOS
+# Lumiere (iOS)
  
 An iOS app built with Swift UIKit that allows users to add, edit, and delete films they've watched to the app's lists. The app features an authentication system using FirebaseAuth and storage system using FirebaseFirestore. Two lists are implemented in the app, one storing the title, rating, and other information of the movie that they've watched, and the other keeping score of the title of any unwatched films.
 
