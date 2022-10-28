@@ -199,7 +199,7 @@ class SignUpViewController : UIViewController {
         let err = validateFields()
         
         if (err != nil) {
-            Utilities.showAlert(err!, self)
+            Utilities.showAlert(err!.debugDescription, self)
         }
         else {
             
@@ -217,11 +217,13 @@ class SignUpViewController : UIViewController {
                         if err != nil {
                             Utilities.showAlert(err!.localizedDescription, self)
                         }
+                        else {
+                            // Dismiss sign-up screen
+                            self.dismiss(animated: true)
+                        }
                     }
                 }
             }
-            // Dismiss sign-up screen
-            dismiss(animated: true)
         }
     }
     
