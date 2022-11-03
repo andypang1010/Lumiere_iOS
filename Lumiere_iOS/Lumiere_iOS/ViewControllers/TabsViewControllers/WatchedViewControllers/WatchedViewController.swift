@@ -31,7 +31,7 @@ class WatchedViewController : UIViewController {
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
         // Fetch all the documents in the current user's watchedList by order of title
-        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").order(by: "title").addSnapshotListener { querySnapshot, err in
+        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").order(by: "hasLiked", descending: true).order(by: "title").addSnapshotListener { querySnapshot, err in
             if let err = err {
                 if err.localizedDescription != "Missing or insufficient permissions." {
                     Utilities.showAlert(err.localizedDescription, self)
