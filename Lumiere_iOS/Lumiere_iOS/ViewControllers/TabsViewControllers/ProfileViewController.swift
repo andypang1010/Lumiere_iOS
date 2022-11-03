@@ -14,7 +14,6 @@ class ProfileViewController : UIViewController {
     var photoImageView = UIImageView()
     var photoUploadButton = UIButton()
     var emailLabel = UILabel()
-    var uidLabel = UILabel()
     var deleteAccountButton = UIButton()
     
     override func viewDidLoad() {
@@ -30,6 +29,45 @@ class ProfileViewController : UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
+        photoImageView = {
+            let imageView = UIImageView()
+            imageView.tintColor = Utilities.boxColor
+            imageView.contentMode = .scaleToFill
+            imageView.layer.cornerRadius = 100
+            imageView.layer.borderWidth = 12
+            imageView.layer.borderColor = Utilities.boxColor?.cgColor
+            imageView.clipsToBounds = true
+            return imageView
+        }()
+        
+        photoUploadButton = {
+            let button = UIButton()
+            button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+            button.tintColor = Utilities.textColor
+            button.contentVerticalAlignment = .fill
+            button.contentHorizontalAlignment = .fill
+            button.addTarget(self, action: #selector(self.uploadButtonTapped), for: .touchUpInside)
+            return button
+        }()
+        
+        emailLabel = {
+            let label = UILabel()
+            label.text = Auth.auth().currentUser?.email
+            label.numberOfLines = 1
+            label.font = Utilities.largeFont
+            label.textColor = Utilities.textColor
+            return label
+        }()
+        
+        deleteAccountButton = {
+            let button = UIButton()
+            button.setTitle("Delete Account", for: .normal)
+            button.titleLabel?.font = Utilities.commentFont
+            button.setTitleColor(Utilities.optionalColor, for: .normal)
+            button.addTarget(self, action: #selector(self.deleteAccountButtonTapped), for: .touchUpInside)
+            return button
+        }()
+        
         Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).addSnapshotListener { querySnapshot, err in
             if let err = err {
                 if err.localizedDescription != "Missing or insufficient permissions." {
@@ -37,17 +75,6 @@ class ProfileViewController : UIViewController {
                 }
             }
             else {
-                self.photoImageView = {
-                    let imageView = UIImageView()
-                    imageView.tintColor = Utilities.boxColor
-                    imageView.contentMode = .scaleToFill
-                    imageView.layer.cornerRadius = 100
-                    imageView.layer.borderWidth = 12
-                    imageView.layer.borderColor = Utilities.boxColor?.cgColor
-                    imageView.clipsToBounds = true
-                    return imageView
-                }()
-                
                 // Listen to changes in the profilePhoto field of the user document
                 let profilePhotoURL = querySnapshot?.get("profilePhoto")
                 
@@ -62,49 +89,12 @@ class ProfileViewController : UIViewController {
                         self.photoImageView.image = UIImage(data: data)
                     }
                 }
-
-                self.photoUploadButton = {
-                    let button = UIButton()
-                    button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
-                    button.tintColor = Utilities.textColor
-                    button.contentVerticalAlignment = .fill
-                    button.contentHorizontalAlignment = .fill
-                    button.addTarget(self, action: #selector(self.uploadButtonTapped), for: .touchUpInside)
-                    return button
-                }()
-                
-                self.emailLabel = {
-                    let label = UILabel()
-                    label.text = Auth.auth().currentUser?.email
-                    label.numberOfLines = 1
-                    label.font = Utilities.largeFont
-                    label.textColor = Utilities.textColor
-                    return label
-                }()
-                
-                self.uidLabel = {
-                    let label = UILabel()
-                    label.text = "UID: \(Auth.auth().currentUser!.uid)"
-                    label.numberOfLines = 1
-                    label.font = Utilities.commentFont
-                    label.textColor = Utilities.textColor
-                    return label
-                }()
-                
-                self.deleteAccountButton = {
-                    let button = UIButton()
-                    button.setTitle("Delete Account", for: .normal)
-                    button.titleLabel?.font = Utilities.commentFont
-                    button.setTitleColor(Utilities.optionalColor, for: .normal)
-                    button.addTarget(self, action: #selector(self.deleteAccountButtonTapped), for: .touchUpInside)
-                    return button
-                }()
-                
-                Utilities.addViews([self.photoImageView, self.photoUploadButton, self.emailLabel, self.uidLabel, self.deleteAccountButton], self.view)
-                
-                self.setUpConstraints()
             }
         }
+        
+        Utilities.addViews([photoImageView, photoUploadButton, emailLabel, deleteAccountButton], self.view)
+            
+        setUpConstraints()
     }
     
     func setUpConstraints() {
@@ -126,11 +116,6 @@ class ProfileViewController : UIViewController {
         NSLayoutConstraint.activate([
             emailLabel.topAnchor.constraint(equalTo: photoUploadButton.bottomAnchor, constant: 50),
             emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            uidLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5),
-            uidLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([

@@ -33,7 +33,7 @@ class WishlistViewController: UIViewController {
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
         // Fetch all the documents in the current user's watchedList
-        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").addSnapshotListener { querySnapshot, err in
+        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("wishlist").order(by: "title").addSnapshotListener { querySnapshot, err in
             if let err = err {
                 if err.localizedDescription != "Missing or insufficient permissions." {
                     Utilities.showAlert(err.localizedDescription, self)
@@ -79,7 +79,7 @@ class WishlistViewController: UIViewController {
     
     func setUpConstraints() {
         NSLayoutConstraint.activate([
-            wishlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            wishlistTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             wishlistTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
             wishlistTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15),
             wishlistTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)

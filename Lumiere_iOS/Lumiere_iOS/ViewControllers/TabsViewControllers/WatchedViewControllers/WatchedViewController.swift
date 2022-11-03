@@ -30,8 +30,8 @@ class WatchedViewController : UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = Utilities.highlightColor
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([.font: Utilities.highlightTextFont], for: .normal)
         
-        // Fetch all the documents in the current user's watchedList
-        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").addSnapshotListener { querySnapshot, err in
+        // Fetch all the documents in the current user's watchedList by order of title
+        Utilities.usersCollectionReference.document((Auth.auth().currentUser?.email)!).collection("watchedList").order(by: "title").addSnapshotListener { querySnapshot, err in
             if let err = err {
                 if err.localizedDescription != "Missing or insufficient permissions." {
                     Utilities.showAlert(err.localizedDescription, self)
@@ -40,7 +40,6 @@ class WatchedViewController : UIViewController {
             else {
                 self.watchedList = []
                 for document in querySnapshot!.documents {
-                    
                     // Convert FIRTimestamp to NSDate
                     guard let stamp = document.get("date") as? Timestamp
                     else {
@@ -72,7 +71,7 @@ class WatchedViewController : UIViewController {
     func setUpConstraints() {
         
         NSLayoutConstraint.activate([
-            watchedTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            watchedTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             watchedTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 15),
             watchedTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -15),
             watchedTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
